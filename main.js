@@ -67,10 +67,12 @@ $(document).ready(function() {
 
     },
     showHiddenLetterList : function() {
-      console.log(createAndShowSecretWord.generateRandomSecretWord());
+      //takes return from secret word generator
       var theSecretWord = createAndShowSecretWord.generateRandomSecretWord();
-    },
-
+      console.log(theSecretWord);
+      for (var i=0; i<theSecretWord.length; i++) {
+        $('#hiddenLetterList').append('_ ');
+      }
   };
 
 
