@@ -16,14 +16,19 @@ $(document).ready(function() {
     // returnTheSecretWord : function (theSecretWord) {
     //   console.log('returnTheSecretWord has: '+theSecretWord);
     //   return theSecretWord;
-    //   //this is just storing the secret word so it can be called from other functions
+    //   this is not working
     // },
 
 
     showHiddenLetterList : function(theSecretWord) {
+      var secretWordAsArray = [];
       for (var i=0; i<theSecretWord.length; i++) {
-        $('#hiddenLetterList').append('_ '); //add an underscore for each letter in the secret word
+        secretWordAsArray.push('_ ');
+        $('#hiddenLetterList').append(secretWordAsArray[i]);
       }
+      // for (var i=0; i<theSecretWord.length; i++) {
+      //   $('#hiddenLetterList').append(secretWordAsArray[i]); //add an underscore for each letter in the secret word
+      // }
     }
   };
 
