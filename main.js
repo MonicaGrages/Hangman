@@ -12,10 +12,16 @@ $(document).ready(function() {
     generateRandomSecretWord : function () {
       //will get random secret word from word bank and
       //add hidden letter list to game board
+      //math.random?
+      var randomNumber = Math.random
+      //needs to reference secretWord.wordBank.length
+      var theSecretWord = secretWord.wordBank[];
+
 
     },
     createLetterBoard : function() {
       //will make the letter board show up after game starts
+      //could just add a class to an already existing letter board that makes its visibility not hidden?
 
     },
     endGame : function () {
@@ -28,31 +34,37 @@ $(document).ready(function() {
   };
 
 
-var scoreBoard = {
+  var scoreBoard = {
 
-};
-
-
+  };
 
 
 
+  var secretWord = {
+    wordBank : ['tacos', 'banana', 'hat', 'array'];
+  };
 
 
 
-var buttonHandlers = {
-  startClickHandler : function() {
-    //event handler for start button click
-    //should call gameBoard.startGame() from here
-    gameBoard.startGame();
-  },
-  resetClickHandler : function() {
-    //event handler for reset button click
-  },
-  letterClickHandler : function () {
-    //add event handler for letter clicks
-    //should call letter evaluating function(s)
-  }
-};
+
+
+
+
+
+  var buttonHandlers = {
+    startClickHandler : function() {
+      //event handler for start button click
+      //should call gameBoard.startGame() from here
+      gameBoard.startGame();
+    },
+    resetClickHandler : function() {
+      //event handler for reset button click
+    },
+    letterClickHandler : function () {
+      //add event handler for letter clicks
+      //should call letter evaluating function(s)
+    }
+  };
 
 
 
