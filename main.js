@@ -53,6 +53,8 @@ $(document).ready(function() {
       letterBoard.showLetters();
     },
 
+    numberOfGuessesRemaining : 6,
+
     evaluateGuess : function (theClickedLetter, theSecretWord) {
       //how do I get the secret word here?
       for (var i=0; i<theSecretWord.length; i++) {
@@ -63,9 +65,16 @@ $(document).ready(function() {
         }
       }
       console.log('miss');
+      game.numberOfGuessesRemaining --;
+      $('#numberOfGuessesRemaining').html(game.numberOfGuessesRemaining);
+      if (game.numberOfGuessesRemaining === 0) {
+        game.endGame();
+      }
+      //and decrement number of remaining guesses
     },
 
     endGame : function () {
+      console.log('game over');
       //win vs loss?
       //create reset button
       game.isOngoing = false;
