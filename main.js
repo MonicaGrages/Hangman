@@ -2,16 +2,24 @@ $(document).ready(function() {
 
 
 
-  var gameBoard = {
+  var game = {
+    isOngoing : false,
     startGame : function () {
       // called by start button click handler
       //should call generateRandomSecretWord and createLetterBoard
-      gameBoard.createLetterBoard();
+      if (game.isOngoing === false) {
+        game.isOngoing = true;
+        game.createLetterBoard();
+        game.secretWord();
+      } else if (game.isOngoing === true) {
+        return;
+      }
     },
 
-    showHiddenLetterList : function () {
-      secretWord.generateRandomSecretWord();
-      //also call letterButtons object here?
+    secretWord : function () {
+      createAndShowSecretWord.generateRandomSecretWord();
+      createAndShowSecretWord.showHiddenLetterList();
+
     },
 
 
@@ -24,10 +32,11 @@ $(document).ready(function() {
     endGame : function () {
       //win vs loss?
       //need to have a reset button pop up
+      game.isOngoing = false;
     },
 
     resetGame : function () {
-      //will be called when user clicks reset button
+      //
     }
 
   };
@@ -41,21 +50,25 @@ $(document).ready(function() {
         $('#letterBoard').append('<button>'+letterBoard.lettersArray[i]+'</button>');
       }
     },
-
   };
 
 
 
 
-  var secretWord = {
+  var createAndShowSecretWord = {
     wordBank : ['tacos', 'banana', 'hat', 'array'],
     generateRandomSecretWord : function () {
       //will get random secret word from word bank and
       //add hidden letter list to game board
       //math.random?
-      var randomIndexNumber = Math.floor(secretWord.wordBank.length*(Math.random()));
-      var theSecretWord = secretWord.wordBank[randomIndexNumber];
-      console.log(theSecretWord);
+      var randomIndexNumber = Math.floor(createAndShowSecretWord.wordBank.length*(Math.random()));
+      var theSecretWord = createAndShowSecretWord.wordBank[randomIndexNumber];
+      return theSecretWord;
+
+    },
+    showHiddenLetterList : function() {
+      console.log(createAndShowSecretWord.generateRandomSecretWord());
+      var theSecretWord = createAndShowSecretWord.generateRandomSecretWord();
     },
 
   };
@@ -64,20 +77,20 @@ $(document).ready(function() {
 
 
   var scoreBoard = {
-
+    //Ice Box
   };
 
 
 
   var buttonHandlers = {
     startClickHandler : function() {
-      gameBoard.startGame();
+      game.startGame();
     },
     resetClickHandler : function() {
       //event handler for reset button click
     },
     letterClickHandler : function () {
-      //add event handler for letter clicks
+      //called by event handler for letter clicks
       //should call letter evaluating function(s)
     }
   };
