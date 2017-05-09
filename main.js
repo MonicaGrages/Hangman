@@ -15,13 +15,10 @@ $(document).ready(function() {
         return;
       }
     },
-
     secretWord : function () {
       createAndShowSecretWord.generateRandomSecretWord();
       createAndShowSecretWord.showHiddenLetterList();
-
     },
-
 
     createLetterBoard : function() {
       //will make the letter board show up after game starts
@@ -29,9 +26,19 @@ $(document).ready(function() {
       letterBoard.showLetters();
     },
 
+    evaluateGuess : function (theClickedLetter) {
+      //how do I get the secret word here?
+      // for (var i=0; i<theSecretWord.length; i++) {
+      //   if (theClickedLetter === theSecretWord[i]) {
+      //     console.log('match');
+      //   }
+      // }
+
+    },
+
     endGame : function () {
       //win vs loss?
-      //need to have a reset button pop up
+      //create reset button
       game.isOngoing = false;
     },
 
@@ -64,15 +71,17 @@ $(document).ready(function() {
       var randomIndexNumber = Math.floor(createAndShowSecretWord.wordBank.length*(Math.random()));
       var theSecretWord = createAndShowSecretWord.wordBank[randomIndexNumber];
       return theSecretWord;
-
+      //this should return a secret so it can be called from other functions
     },
+
     showHiddenLetterList : function() {
-      //takes return from secret word generator
+      //store return from secret word generator
       var theSecretWord = createAndShowSecretWord.generateRandomSecretWord();
       console.log(theSecretWord);
       for (var i=0; i<theSecretWord.length; i++) {
-        $('#hiddenLetterList').append('_ ');
+        $('#hiddenLetterList').append('_ '); //add an underscore for each letter in the secret word
       }
+    }
   };
 
 
@@ -91,9 +100,9 @@ $(document).ready(function() {
     resetClickHandler : function() {
       //event handler for reset button click
     },
-    letterClickHandler : function () {
-      //called by event handler for letter clicks
-      //should call letter evaluating function(s)
+    letterClickHandler : function ($event) {
+      var $theClickedLetter = $(event.target);
+      game.evaluateGuess($theClickedLetter.html());
     }
   };
 
@@ -101,6 +110,7 @@ $(document).ready(function() {
 
 
   $('#startButton').on('click', buttonHandlers.startClickHandler);
+  $('#letterBoard').on('click', buttonHandlers.letterClickHandler);
   //put reset button click event handler here and call resetClickHandler
   //put letter click event handler here and call letterClickHandler
 
