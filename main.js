@@ -18,6 +18,7 @@ $(document).ready(function() {
     createLetterBoard : function() {
       //will make the letter board show up after game starts
       //could just add a class to an already existing letter board that makes its visibility not hidden?
+      letterBoard.showLetters();
     },
 
     endGame : function () {
@@ -34,12 +35,14 @@ $(document).ready(function() {
 
 
   var letterBoard = {
-    lettersArray : [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z],
+    lettersArray : ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
     showLetters : function() {
-
+      for (var i=0; i<letterBoard.lettersArray.length; i++) {
+        $('#letterBoard').append('<button>'+letterBoard.lettersArray[i]+'</button>');
+      }
     },
 
-  }
+  };
 
 
 
