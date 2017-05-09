@@ -6,16 +6,14 @@ $(document).ready(function() {
     startGame : function () {
       // called by start button click handler
       //should call generateRandomSecretWord and createLetterBoard
-      gameBoard.generateRandomSecretWord();
       gameBoard.createLetterBoard();
     },
-    generateRandomSecretWord : function () {
-      //will get random secret word from word bank and
-      //add hidden letter list to game board
-      //math.random?
-      var randomIndexNumber = Math.floor(secretWord.wordBank.length*(Math.random()));
-      var theSecretWord = secretWord.wordBank[randomIndexNumber];
-      console.log(theSecretWord);
+
+    showHiddenLetterList : function () {
+      secretWord.generateRandomSecretWord();
+    },
+
+
 
 
     },
@@ -42,6 +40,13 @@ $(document).ready(function() {
 
   var secretWord = {
     wordBank : ['tacos', 'banana', 'hat', 'array'],
+    generateRandomSecretWord : function () {
+      //will get random secret word from word bank and
+      //add hidden letter list to game board
+      //math.random?
+      var randomIndexNumber = Math.floor(secretWord.wordBank.length*(Math.random()));
+      var theSecretWord = secretWord.wordBank[randomIndexNumber];
+      console.log(theSecretWord);
   };
 
 
