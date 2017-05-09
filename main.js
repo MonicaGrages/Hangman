@@ -2,6 +2,33 @@ $(document).ready(function() {
 
 
 
+  var createAndShowSecretWord = {
+    wordBank : ['tacos', 'banana', 'hat', 'array'],
+    generateRandomSecretWord : function () {
+      //will get random secret word from word bank and
+      //add hidden letter list to game board
+      var randomIndexNumber = Math.floor(createAndShowSecretWord.wordBank.length*(Math.random()));
+      var theSecretWord = createAndShowSecretWord.wordBank[randomIndexNumber];
+      // createAndShowSecretWord.returnTheSecretWord(theSecretWord);
+      createAndShowSecretWord.showHiddenLetterList(theSecretWord);
+      return theSecretWord;
+    },
+    // returnTheSecretWord : function (theSecretWord) {
+    //   console.log('returnTheSecretWord has: '+theSecretWord);
+    //   return theSecretWord;
+    //   //this is just storing the secret word so it can be called from other functions
+    // },
+
+
+    showHiddenLetterList : function(theSecretWord) {
+      console.log("showHiddenLetterList has: "+theSecretWord);
+      for (var i=0; i<theSecretWord.length; i++) {
+        $('#hiddenLetterList').append('_ '); //add an underscore for each letter in the secret word
+      }
+    }
+  };
+
+
   var game = {
     isOngoing : false,
     startGame : function () {
@@ -15,10 +42,9 @@ $(document).ready(function() {
         return;
       }
     },
-    secretWord : function () {
-      createAndShowSecretWord.generateRandomSecretWord();
-      createAndShowSecretWord.showHiddenLetterList();
-    },
+
+    secretWord : createAndShowSecretWord.generateRandomSecretWord
+    ,
 
     createLetterBoard : function() {
       //will make the letter board show up after game starts
@@ -26,14 +52,15 @@ $(document).ready(function() {
       letterBoard.showLetters();
     },
 
-    evaluateGuess : function (theClickedLetter) {
+    evaluateGuess : function (theClickedLetter, theSecretWord) {
+
+      // console.log('evaluateGuess has : '+theSecretWord);
       //how do I get the secret word here?
       // for (var i=0; i<theSecretWord.length; i++) {
       //   if (theClickedLetter === theSecretWord[i]) {
       //     console.log('match');
       //   }
       // }
-
     },
 
     endGame : function () {
@@ -62,27 +89,7 @@ $(document).ready(function() {
 
 
 
-  var createAndShowSecretWord = {
-    wordBank : ['tacos', 'banana', 'hat', 'array'],
-    generateRandomSecretWord : function () {
-      //will get random secret word from word bank and
-      //add hidden letter list to game board
-      //math.random?
-      var randomIndexNumber = Math.floor(createAndShowSecretWord.wordBank.length*(Math.random()));
-      var theSecretWord = createAndShowSecretWord.wordBank[randomIndexNumber];
-      return theSecretWord;
-      //this should return a secret so it can be called from other functions
-    },
 
-    showHiddenLetterList : function() {
-      //store return from secret word generator
-      var theSecretWord = createAndShowSecretWord.generateRandomSecretWord();
-      console.log(theSecretWord);
-      for (var i=0; i<theSecretWord.length; i++) {
-        $('#hiddenLetterList').append('_ '); //add an underscore for each letter in the secret word
-      }
-    }
-  };
 
 
 
@@ -102,7 +109,9 @@ $(document).ready(function() {
     },
     letterClickHandler : function ($event) {
       var $theClickedLetter = $(event.target);
-      game.evaluateGuess($theClickedLetter.html());
+      game.evaluateGuess($theClickedLetter.html(), game.secretWord);
+      console.log($theClickedLetter.html());//thesecretword needs to be passed in too though);
+      //this return secret word is not working
     }
   };
 
