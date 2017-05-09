@@ -11,20 +11,20 @@ $(document).ready(function() {
 
     showHiddenLetterList : function () {
       secretWord.generateRandomSecretWord();
+      //also call letterButtons object here?
     },
 
 
-
-
-    },
     createLetterBoard : function() {
       //will make the letter board show up after game starts
       //could just add a class to an already existing letter board that makes its visibility not hidden?
-
     },
+
     endGame : function () {
       //win vs loss?
+      //need to have a reset button pop up
     },
+
     resetGame : function () {
       //will be called when user clicks reset button
     }
@@ -32,9 +32,15 @@ $(document).ready(function() {
   };
 
 
-  var scoreBoard = {
 
-  };
+  var letterBoard = {
+    lettersArray : [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z],
+    showLetters : function() {
+
+    },
+
+  }
+
 
 
 
@@ -47,19 +53,21 @@ $(document).ready(function() {
       var randomIndexNumber = Math.floor(secretWord.wordBank.length*(Math.random()));
       var theSecretWord = secretWord.wordBank[randomIndexNumber];
       console.log(theSecretWord);
+    },
+
   };
 
 
 
 
+  var scoreBoard = {
 
+  };
 
 
 
   var buttonHandlers = {
     startClickHandler : function() {
-      //event handler for start button click
-      //should call gameBoard.startGame() from here
       gameBoard.startGame();
     },
     resetClickHandler : function() {
