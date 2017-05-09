@@ -3,7 +3,7 @@ $(document).ready(function() {
 
 
   var createAndShowSecretWord = {
-    wordBank : ['tacos', 'banana', 'hat', 'array'],
+    wordBank : ['tacos'],
     generateRandomSecretWord : function () {
       //will get random secret word from word bank and
       //add hidden letter list to game board
@@ -21,7 +21,6 @@ $(document).ready(function() {
 
 
     showHiddenLetterList : function(theSecretWord) {
-      console.log("showHiddenLetterList has: "+theSecretWord);
       for (var i=0; i<theSecretWord.length; i++) {
         $('#hiddenLetterList').append('_ '); //add an underscore for each letter in the secret word
       }
@@ -37,14 +36,11 @@ $(document).ready(function() {
       if (game.isOngoing === false) {
         game.isOngoing = true;
         game.createLetterBoard();
-        game.secretWord();
+        createAndShowSecretWord.generateRandomSecretWord();
       } else if (game.isOngoing === true) {
         return;
       }
     },
-
-    secretWord : createAndShowSecretWord.generateRandomSecretWord
-    ,
 
     createLetterBoard : function() {
       //will make the letter board show up after game starts
@@ -53,14 +49,15 @@ $(document).ready(function() {
     },
 
     evaluateGuess : function (theClickedLetter, theSecretWord) {
-
-      // console.log('evaluateGuess has : '+theSecretWord);
       //how do I get the secret word here?
-      // for (var i=0; i<theSecretWord.length; i++) {
-      //   if (theClickedLetter === theSecretWord[i]) {
-      //     console.log('match');
-      //   }
-      // }
+      for (var i=0; i<theSecretWord.length; i++) {
+        if (theClickedLetter === (theSecretWord[i]).toUpperCase()) {
+          console.log('match');
+
+          return;
+        }
+      }
+      console.log('miss');
     },
 
     endGame : function () {
@@ -109,8 +106,8 @@ $(document).ready(function() {
     },
     letterClickHandler : function ($event) {
       var $theClickedLetter = $(event.target);
-      game.evaluateGuess($theClickedLetter.html(), game.secretWord);
-      console.log($theClickedLetter.html());//thesecretword needs to be passed in too though);
+      game.evaluateGuess($theClickedLetter.html(), 'tacos');
+      //thesecretword needs to be passed in too though);
       //this return secret word is not working
     }
   };
@@ -121,7 +118,6 @@ $(document).ready(function() {
   $('#startButton').on('click', buttonHandlers.startClickHandler);
   $('#letterBoard').on('click', buttonHandlers.letterClickHandler);
   //put reset button click event handler here and call resetClickHandler
-  //put letter click event handler here and call letterClickHandler
 
 
 
