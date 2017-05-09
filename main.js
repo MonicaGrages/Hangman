@@ -1,24 +1,22 @@
 $(document).ready(function() {
 
 
-
   var createAndShowSecretWord = {
-    wordBank : ['tacos'],
+    wordBank : ['tacos', 'watermelon', 'hat'],
     generateRandomSecretWord : function () {
       //will get random secret word from word bank and
       //add hidden letter list to game board
       var randomIndexNumber = Math.floor(createAndShowSecretWord.wordBank.length*(Math.random()));
-      var theSecretWord = createAndShowSecretWord.wordBank[randomIndexNumber];
+      secretWord = createAndShowSecretWord.wordBank[randomIndexNumber];
+      return secretWord;
       // createAndShowSecretWord.returnTheSecretWord(theSecretWord);
-      createAndShowSecretWord.showHiddenLetterList(theSecretWord);
-      return theSecretWord;
+      createAndShowSecretWord.showHiddenLetterList(secretWord);
     },
     // returnTheSecretWord : function (theSecretWord) {
     //   console.log('returnTheSecretWord has: '+theSecretWord);
     //   return theSecretWord;
     //   this is not working
     // },
-
 
     showHiddenLetterList : function(theSecretWord) {
       var secretWordAsArray = [];
@@ -56,21 +54,35 @@ $(document).ready(function() {
     numberOfGuessesRemaining : 6,
 
     evaluateGuess : function (theClickedLetter, theSecretWord) {
-      //how do I get the secret word here?
+      //how do I get the random secret word here?
+      var secretWordAsArray = [];
       for (var i=0; i<theSecretWord.length; i++) {
-        if (theClickedLetter === (theSecretWord[i]).toUpperCase()) {
-          console.log('match');
-
-          return;
+        secretWordAsArray[i] = "_ ";
+        $('#hiddenLetterList').html(secretWordAsArray.toString());
+      }
+      console.log(secretWordAsArray.toString());
+      for (var i=0; i<theSecretWord.length; i++) {
+        if (secretWordAsArray[i] === "_ ") {
+          if(theClickedLetter === (theSecretWord[i]).toUpperCase()) {
+            secretWordAsArray[i] = theSecretWord[i];
+            console.log('match');
+            console.log(secretWordAsArray.toString());
+          }
         }
       }
-      console.log('miss');
-      game.numberOfGuessesRemaining --;
-      $('#numberOfGuessesRemaining').html(game.numberOfGuessesRemaining);
-      if (game.numberOfGuessesRemaining === 0) {
-        game.endGame();
-      }
-      //and decrement number of remaining guesses
+      $('hiddenLetterList').html(secretWordAsArray.toString());
+      // for (var i=0; i<theSecretWord.length; i++) {
+      //   if (theClickedLetter === (theSecretWord[i]).toUpperCase()) {
+      //     console.log('match');
+      //     return;
+      //   }
+      // }
+      // console.log('miss');
+      // game.numberOfGuessesRemaining --;
+      // $('#numberOfGuessesRemaining').html(game.numberOfGuessesRemaining);
+      // if (game.numberOfGuessesRemaining === 0) {
+      //   game.endGame();
+      // }
     },
 
     endGame : function () {
@@ -100,11 +112,6 @@ $(document).ready(function() {
 
 
 
-
-
-
-
-
   var scoreBoard = {
     //Ice Box
   };
@@ -112,22 +119,25 @@ $(document).ready(function() {
 
 
   var buttonHandlers = {
-    startClickHandler : function() {
+    startClickHandler : function(event) {
+      event.preventDefault();
       game.startGame();
     },
     resetClickHandler : function() {
       //event handler for reset button click
     },
-    letterClickHandler : function ($event) {
+    letterClickHandler : function (event) {
+      event.preventDefault();
       var $theClickedLetter = $(event.target);
-      game.evaluateGuess($theClickedLetter.html(), 'tacos');
-      //thesecretword needs to be passed in too though);
-      //this return secret word is not working
+      game.evaluateGuess($theClickedLetter.html(), secretWord); //the actual secret word needs to be passed in here
     }
   };
 
 
 
+  var secretWord = createAndShowSecretWord.generateRandomSecretWord();
+  console.log(secretWord);
+  var secretWordAsArray = secretWord.split("");
 
   $('#startButton').on('click', buttonHandlers.startClickHandler);
   $('#letterBoard').on('click', buttonHandlers.letterClickHandler);
