@@ -13,9 +13,9 @@ $(document).ready(function() {
       //will get random secret word from word bank and
       //add hidden letter list to game board
       //math.random?
-      var randomNumber = Math.random
-      //needs to reference secretWord.wordBank.length
-      var theSecretWord = secretWord.wordBank[];
+      var randomIndexNumber = Math.floor(secretWord.wordBank.length*(Math.random()));
+      var theSecretWord = secretWord.wordBank[randomIndexNumber];
+      console.log(theSecretWord);
 
 
     },
@@ -41,7 +41,7 @@ $(document).ready(function() {
 
 
   var secretWord = {
-    wordBank : ['tacos', 'banana', 'hat', 'array'];
+    wordBank : ['tacos', 'banana', 'hat', 'array'],
   };
 
 
