@@ -78,6 +78,7 @@ $(document).ready(function() {
 
     resetGame : function () {
       //called by reset button click
+      //can I add are you sure prompt if game.isOngoing === true?
       console.log('reset');
       game.secretWord = createAndShowSecretWord.generateRandomSecretWord();
       $('#hiddenLetterList').empty();
@@ -130,12 +131,10 @@ $(document).ready(function() {
     }
   };
 
-  // var secretWordAsArray = secretWord.split("");
 
   $('#startButton').on('click', buttonHandlers.startClickHandler);
   $('#letterBoard').on('click', buttonHandlers.letterClickHandler);
   $('#buttonContainer').on('click', '#resetButton', game.resetGame);
-  //put reset button click event handler here and call resetClickHandler
 
 
 
