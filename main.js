@@ -27,7 +27,7 @@ $(document).ready(function() {
         secretWordStuff.showHiddenLetterList();
         letterBoard.showLetters();
         $('#startButton').remove();
-        $('#resetButtonContainer').html('<button id="resetButton" class="button">Reset Game</button>');
+        $('#resetButtonContainer').html('<button id="resetButton" class="button btn">Reset Game</button>');
         $('#letterBoard').prop('disabled', false);
     },
     numberOfGuessesRemaining : 6,
@@ -85,7 +85,7 @@ $(document).ready(function() {
     lettersArray : ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
     showLetters : function() {
       for (var i=0; i<letterBoard.lettersArray.length; i++) {
-        $('#letterBoard').append('<button class="btn">'+letterBoard.lettersArray[i]+'</button>');
+        $('#letterBoard').append('<button class="letter btn">'+letterBoard.lettersArray[i]+'</button>');
       }
       $('#letterBoard').prop('disabled', false);
     },

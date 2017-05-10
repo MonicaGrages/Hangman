@@ -9,12 +9,12 @@
   <header>
     <h1>Hangman</h1>
   </header>
-  <main>
-    <div id='buttons'>
-      <button id='startButton' class='button'>Start New Game</button>
+  <main class='container'>
+    <div id='button-container'>
+      <button id='startButton' class='button btn'>Start New Game</button>
       <div id='resetButtonContainer'></div>
     </div>
-    <div id='gameBoard' class='container'>
+    <div id='gameBoard'>
       <div id='letterBoard' class='gameBoard'>
       </div>
       <div id='hiddenLetterList' class='gameBoard'>
@@ -27,7 +27,7 @@
     <div id='score-board'>
       <p>Games Won: <span id='number-of-games-won'>0</span></p>
       <p>Games Lost: <span id='number-of-games-lost'>0</span></p>
-      <button id='reset-score-board'>Reset Score Board</button>
+      <button id='reset-score-board' class='button btn'>Reset Score Board</button>
     </div>
   </main>
   <footer></footer>
