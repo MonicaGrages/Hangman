@@ -112,7 +112,7 @@ $(document).ready(function() {
     letterClickHandler : function (event) {
       event.stopPropagation();
       var $theClickedLetter = $(event.target);
-      if (game.isOngoing === true && $theClickedLetter.attr('id') !== 'letterBoard') {
+      if (game.isOngoing === true && $theClickedLetter.attr('id') !== 'letterBoard') { //so nothing happens if user clicks on letterBoard parent div instead of letter button
         game.evaluateGuess($theClickedLetter.html(), game.secretWord);
         letterBoard.disableGuessedLetters($theClickedLetter);
       }
