@@ -42,6 +42,7 @@ $(document).ready(function() {
            game.numberOfCorrectGuesses ++;
            if (game.numberOfCorrectGuesses === theSecretWord.length) {
              game.endGame("You Win! ");
+             scoreBoard.incrementScore();
             }
           }
         else if (theClickedLetter !== (theSecretWord[i]).toUpperCase()){
@@ -65,7 +66,6 @@ $(document).ready(function() {
       $('#letterBoard').prop('disabled', true);
       $('#letterBoard').html('<span class="winOrLossMessage">'+winOrLossMessage+'</span>');
       $('#hiddenLetterList').html(game.secretWord);
-
     },
     resetGame : function () {
       //called by reset button click
@@ -75,6 +75,7 @@ $(document).ready(function() {
       $('#letterBoard').empty();
       game.numberOfGuessesRemaining = 6;
       $('#numberOfGuessesRemaining').html(game.numberOfGuessesRemaining);
+      $('#hangman-display').attr('src', "images/Hangman-6.png");
       game.numberOfCorrectGuesses = 0;
       game.startGame();
     }
@@ -100,7 +101,12 @@ $(document).ready(function() {
 
 
   var scoreBoard = {
-    //Ice Box
+    score : 0,
+    incrementScore : function() {
+      score++;
+      //update HTML
+    },
+
   };
 
 
