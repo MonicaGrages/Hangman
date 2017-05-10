@@ -10,7 +10,6 @@ $(document).ready(function() {
       secretWord = createAndShowSecretWord.wordBank[randomIndexNumber];
       return secretWord;
       // createAndShowSecretWord.returnTheSecretWord(theSecretWord);
-      createAndShowSecretWord.showHiddenLetterList(secretWord);
     },
     // returnTheSecretWord : function (theSecretWord) {
     //   console.log('returnTheSecretWord has: '+theSecretWord);
@@ -18,12 +17,12 @@ $(document).ready(function() {
     //   this is not working
     // },
 
-    showHiddenLetterList : function(theSecretWord) {
-      var secretWordAsArray = [];
-      for (var i=0; i<theSecretWord.length; i++) {
-        secretWordAsArray.push('_ ');
-        $('#hiddenLetterList').append(secretWordAsArray[i]);
+    showHiddenLetterList : function() {
+      var hiddenLetterArray = [];
+      for (var i=0; i<game.secretWord.length; i++) {
+        hiddenLetterArray.push('_ ');
       }
+      $('#hiddenLetterList').append(hiddenLetterArray.join(' '));
       // for (var i=0; i<theSecretWord.length; i++) {
       //   $('#hiddenLetterList').append(secretWordAsArray[i]); //add an underscore for each letter in the secret word
       // }
@@ -39,7 +38,7 @@ $(document).ready(function() {
       if (game.isOngoing === false) {
         game.isOngoing = true;
         game.createLetterBoard();
-        createAndShowSecretWord.generateRandomSecretWord();
+        createAndShowSecretWord.showHiddenLetterList();
       } else if (game.isOngoing === true) {
         return;
       }
@@ -53,24 +52,22 @@ $(document).ready(function() {
 
     numberOfGuessesRemaining : 6,
 
+    secretWord : createAndShowSecretWord.generateRandomSecretWord(),
+
     evaluateGuess : function (theClickedLetter, theSecretWord) {
       //how do I get the random secret word here?
-      var secretWordAsArray = [];
+      var secretWordAsArray = theSecretWord.split("");
+      // for (var i=0; i<theSecretWord.length; i++) {
+      //   secretWordAsArray[i] = "_ ";
+      //   $('#hiddenLetterList').html(secretWordAsArray.join(' '));
+      // }
       for (var i=0; i<theSecretWord.length; i++) {
-        secretWordAsArray[i] = "_ ";
-        $('#hiddenLetterList').html(secretWordAsArray.toString());
-      }
-      console.log(secretWordAsArray.toString());
-      for (var i=0; i<theSecretWord.length; i++) {
-        if (secretWordAsArray[i] === "_ ") {
           if(theClickedLetter === (theSecretWord[i]).toUpperCase()) {
-            secretWordAsArray[i] = theSecretWord[i];
             console.log('match');
-            console.log(secretWordAsArray.toString());
           }
         }
       }
-      $('hiddenLetterList').html(secretWordAsArray.toString());
+      $('hiddenLetterList').html(secretWordAsArray.join(' '));
       // for (var i=0; i<theSecretWord.length; i++) {
       //   if (theClickedLetter === (theSecretWord[i]).toUpperCase()) {
       //     console.log('match');
@@ -129,15 +126,12 @@ $(document).ready(function() {
     letterClickHandler : function (event) {
       event.preventDefault();
       var $theClickedLetter = $(event.target);
-      game.evaluateGuess($theClickedLetter.html(), secretWord); //the actual secret word needs to be passed in here
+      game.evaluateGuess($theClickedLetter.html(), game.secretWord);
+      console.log($theClickedLetter.html());
     }
   };
 
-
-
-  var secretWord = createAndShowSecretWord.generateRandomSecretWord();
-  console.log(secretWord);
-  var secretWordAsArray = secretWord.split("");
+  // var secretWordAsArray = secretWord.split("");
 
   $('#startButton').on('click', buttonHandlers.startClickHandler);
   $('#letterBoard').on('click', buttonHandlers.letterClickHandler);
