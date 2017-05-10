@@ -64,10 +64,11 @@ $(document).ready(function() {
       for (var i=0; i<theSecretWord.length; i++) {
           if(theClickedLetter === (theSecretWord[i]).toUpperCase()) {
             console.log('match');
+            theCurrentDisplayArray = ($('#hiddenLetterList').html()).split("");
+            console.log(theCurrentDisplayArray);
           }
         }
-      }
-      $('hiddenLetterList').html(secretWordAsArray.join(' '));
+      // $('hiddenLetterList').html(secretWordAsArray.join(' '));
       // for (var i=0; i<theSecretWord.length; i++) {
       //   if (theClickedLetter === (theSecretWord[i]).toUpperCase()) {
       //     console.log('match');
