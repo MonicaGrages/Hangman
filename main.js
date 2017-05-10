@@ -21,11 +21,8 @@ $(document).ready(function() {
       var hiddenLetterArray = [];
       for (var i=0; i<game.secretWord.length; i++) {
         hiddenLetterArray.push('_ ');
+        $('#hiddenLetterList').append('<span id=letter-'+i+'>'+hiddenLetterArray[i]+'</span>');
       }
-      $('#hiddenLetterList').append(hiddenLetterArray.join(' '));
-      // for (var i=0; i<theSecretWord.length; i++) {
-      //   $('#hiddenLetterList').append(secretWordAsArray[i]); //add an underscore for each letter in the secret word
-      // }
     }
   };
 
@@ -55,23 +52,12 @@ $(document).ready(function() {
     secretWord : createAndShowSecretWord.generateRandomSecretWord(),
 
     evaluateGuess : function (theClickedLetter, theSecretWord) {
-      //how do I get the random secret word here?
-      var secretWordAsArray = theSecretWord.split("");
-      // for (var i=0; i<theSecretWord.length; i++) {
-      //   secretWordAsArray[i] = "_ ";
-      //   $('#hiddenLetterList').html(secretWordAsArray.join(' '));
-      // }
       for (var i=0; i<theSecretWord.length; i++) {
           if(theClickedLetter === (theSecretWord[i]).toUpperCase()) {
             console.log('match');
-            theCurrentDisplayArray = ($('#hiddenLetterList').html()).split("");
-            console.log(theCurrentDisplayArray);
+            $('#letter-'+i).html(theSecretWord[i]);
           }
         }
-      // $('hiddenLetterList').html(secretWordAsArray.join(' '));
-      // for (var i=0; i<theSecretWord.length; i++) {
-      //   if (theClickedLetter === (theSecretWord[i]).toUpperCase()) {
-      //     console.log('match');
       //     return;
       //   }
       // }
