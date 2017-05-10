@@ -4,18 +4,12 @@ $(document).ready(function() {
   var createAndShowSecretWord = {
     wordBank : ['tacos', 'watermelon', 'hat'],
     generateRandomSecretWord : function () {
-      //will get random secret word from word bank and
-      //add hidden letter list to game board
+
       var randomIndexNumber = Math.floor(createAndShowSecretWord.wordBank.length*(Math.random()));
       secretWord = createAndShowSecretWord.wordBank[randomIndexNumber];
       return secretWord;
-      // createAndShowSecretWord.returnTheSecretWord(theSecretWord);
     },
-    // returnTheSecretWord : function (theSecretWord) {
-    //   console.log('returnTheSecretWord has: '+theSecretWord);
-    //   return theSecretWord;
-    //   this is not working
-    // },
+
 
     showHiddenLetterList : function() {
       var hiddenLetterArray = [];
@@ -31,11 +25,12 @@ $(document).ready(function() {
     isOngoing : false,
     startGame : function () {
       // called by start button click handler
-      //should call generateRandomSecretWord and createLetterBoard
       if (game.isOngoing === false) {
         game.isOngoing = true;
         game.createLetterBoard();
         createAndShowSecretWord.showHiddenLetterList();
+        $('#startButton').remove();
+        $('#buttonContainer').append('<button id="resetButton">Reset Game</button>');
       } else if (game.isOngoing === true) {
         return;
       }
@@ -52,40 +47,42 @@ $(document).ready(function() {
     secretWord : createAndShowSecretWord.generateRandomSecretWord(),
 
     evaluateGuess : function (theClickedLetter, theSecretWord) {
-      var lettersTheGuessDoesNotMatch = 0;
+      var numberLettersTheGuessDoesNotMatch = 0;
       for (var i=0; i<theSecretWord.length; i++) {
-          if(theClickedLetter === (theSecretWord[i]).toUpperCase()){
-            console.log('match');
-            $('#letter-'+i).html(theSecretWord[i]);
-            game.numberOfCorrectGuesses ++;
-            if (game.numberOfCorrectGuesses === theSecretWord.length) {
-              alert('you win!');
+        if(theClickedLetter === (theSecretWord[i]).toUpperCase()){
+          console.log('match');
+           $('#letter-'+i).html(theSecretWord[i]);
+           game.numberOfCorrectGuesses ++;
+           if (game.numberOfCorrectGuesses === theSecretWord.length) {
+             alert('you win!');
+             game.endGame();
             }
-            //this needs to be fixed - does not recognize if correct letter appears more than once
           }
         else if (theClickedLetter !== (theSecretWord[i]).toUpperCase()){
-          lettersTheGuessDoesNotMatch ++;
+          numberLettersTheGuessDoesNotMatch ++;
         }
       }
-      if (lettersTheGuessDoesNotMatch === theSecretWord.length) {
+      if (numberLettersTheGuessDoesNotMatch === theSecretWord.length) {
         console.log('miss');
         game.numberOfGuessesRemaining --;
         $('#numberOfGuessesRemaining').html(game.numberOfGuessesRemaining);
       }
       if (game.numberOfGuessesRemaining === 0) {
+        alert('you lose');
         game.endGame();
       }
     },
 
     endGame : function () {
       alert('game over');
-      //win vs loss?
-      //create reset button
       game.isOngoing = false;
+      $('#letterBoard').html('');
+
     },
 
     resetGame : function () {
-      //
+      //called by reset button click
+      console.log('reset');
     }
 
   };
@@ -118,9 +115,6 @@ $(document).ready(function() {
       event.preventDefault();
       game.startGame();
     },
-    resetClickHandler : function() {
-      //event handler for reset button click
-    },
     letterClickHandler : function (event) {
       event.preventDefault();
       var $theClickedLetter = $(event.target);
@@ -134,6 +128,7 @@ $(document).ready(function() {
 
   $('#startButton').on('click', buttonHandlers.startClickHandler);
   $('#letterBoard').on('click', buttonHandlers.letterClickHandler);
+  $('#buttonContainer').on('click', '#resetButton', game.resetGame);
   //put reset button click event handler here and call resetClickHandler
 
 
