@@ -23,25 +23,16 @@ $(document).ready(function() {
   var game = {
     isOngoing : false,
     startGame : function () {
-      // called by start button click handler
         game.isOngoing = true;
-        game.createLetterBoard();
         createAndShowSecretWord.showHiddenLetterList();
+        letterBoard.showLetters();
         $('#startButton').remove();
         $('#buttonContainer').html('<button id="resetButton">Reset Game</button>');
         $('#letterBoard').prop('disabled', false);
     },
-
-    createLetterBoard : function() {
-      letterBoard.showLetters();
-    },
-
     numberOfGuessesRemaining : 6,
-
     numberOfCorrectGuesses: 0,
-
     secretWord : createAndShowSecretWord.generateRandomSecretWord(),
-
     evaluateGuess : function (theClickedLetter, theSecretWord) {
       var numberLettersTheGuessDoesNotMatch = 0;
       for (var i=0; i<theSecretWord.length; i++) {
@@ -68,7 +59,6 @@ $(document).ready(function() {
         game.endGame('You Lose');
       }
     },
-
     endGame : function (winOrLossMessage) {
       game.isOngoing = false;
       $('#letterBoard').prop('disabled', true);
@@ -76,7 +66,6 @@ $(document).ready(function() {
       $('#hiddenLetterList').html(game.secretWord);
 
     },
-
     resetGame : function () {
       //called by reset button click
       //can I add are you sure prompt if game.isOngoing === true?
@@ -89,7 +78,6 @@ $(document).ready(function() {
       game.numberOfCorrectGuesses = 0;
       game.startGame();
     }
-
   };
 
 
@@ -129,13 +117,24 @@ $(document).ready(function() {
         game.evaluateGuess($theClickedLetter.html(), game.secretWord);
         letterBoard.disableGuessedLetters($theClickedLetter);
       }
+    },
+    resetClickHandler : function (event) {
+      if (game.isOngoing === true){
+        if (confirm('Are you sure you want to reset the game?') === true) {
+          game.resetGame();
+        } else {
+          return;
+        }
+      } else if (game.isOngoing === false) {
+        game.resetGame();
+      }
     }
   };
 
 
   $('#startButton').on('click', buttonHandlers.startClickHandler);
   $('#letterBoard').on('click', buttonHandlers.letterClickHandler);
-  $('#buttonContainer').on('click', '#resetButton', game.resetGame);
+  $('#buttonContainer').on('click', '#resetButton', buttonHandlers.resetClickHandler);
 
 
 
