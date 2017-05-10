@@ -27,7 +27,7 @@ $(document).ready(function() {
         secretWordStuff.showHiddenLetterList();
         letterBoard.showLetters();
         $('#startButton').remove();
-        $('#buttonContainer').html('<button id="resetButton">Reset Game</button>');
+        $('#resetButtonContainer').html('<button id="resetButton" class="button">Reset Game</button>');
         $('#letterBoard').prop('disabled', false);
     },
     numberOfGuessesRemaining : 6,
@@ -150,7 +150,7 @@ $(document).ready(function() {
 
   $('#startButton').on('click', buttonHandlers.startClickHandler);
   $('#letterBoard').on('click', buttonHandlers.letterClickHandler);
-  $('#buttonContainer').on('click', '#resetButton', buttonHandlers.resetClickHandler);
+  $('#resetButtonContainer').on('click', '#resetButton', buttonHandlers.resetClickHandler);
   $('#reset-score-board').on('click', buttonHandlers.resetScoreBoardHandler);
 
 

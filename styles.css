@@ -1,18 +1,20 @@
 main {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
 }
 
+.gameBoard {
+  width: 50%;
+}
+
+.button {
+  width: 80px;
+  height: 50px;
+}
 
 #letterBoard {
-  height: 100px;
-  width: 70%;
   background-color: turquoise;
 }
 
 #hiddenLetterList {
-  height: 100px;
-  width: 70%;
   background-color: pink;
 }

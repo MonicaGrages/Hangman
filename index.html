@@ -9,14 +9,15 @@
   <header>
     <h1>Hangman</h1>
   </header>
-  <main class= 'container'>
-    <button id='startButton'>Start New Game</button>
-    <div id='buttonContainer'>
+  <main>
+    <div id='buttons'>
+      <button id='startButton' class='button'>Start New Game</button>
+      <div id='resetButtonContainer'></div>
     </div>
     <div id='gameBoard' class='container'>
-      <div id='letterBoard' class='container'>
+      <div id='letterBoard' class='gameBoard'>
       </div>
-      <div id='hiddenLetterList' class='container'>
+      <div id='hiddenLetterList' class='gameBoard'>
       </div>
       <div id='guessesRemainingDisplay'>
       Number of incorrect guesses remaining: <span id='numberOfGuessesRemaining'>6</span>
