@@ -1,11 +1,11 @@
 $(document).ready(function() {
 
 
-  var createAndShowSecretWord = {
+  var secretWordStuff = {
     wordBank : ['tacos', 'watermelon', 'hat'],
     generateRandomSecretWord : function () {
-      var randomIndexNumber = Math.floor(createAndShowSecretWord.wordBank.length*(Math.random()));
-      secretWord = createAndShowSecretWord.wordBank[randomIndexNumber];
+      var randomIndexNumber = Math.floor(secretWordStuff.wordBank.length*(Math.random()));
+      secretWord = secretWordStuff.wordBank[randomIndexNumber];
       return secretWord;
     },
 
@@ -24,7 +24,7 @@ $(document).ready(function() {
     isOngoing : false,
     startGame : function () {
         game.isOngoing = true;
-        createAndShowSecretWord.showHiddenLetterList();
+        secretWordStuff.showHiddenLetterList();
         letterBoard.showLetters();
         $('#startButton').remove();
         $('#buttonContainer').html('<button id="resetButton">Reset Game</button>');
@@ -32,17 +32,16 @@ $(document).ready(function() {
     },
     numberOfGuessesRemaining : 6,
     numberOfCorrectGuesses: 0,
-    secretWord : createAndShowSecretWord.generateRandomSecretWord(),
+    secretWord : secretWordStuff.generateRandomSecretWord(),
     evaluateGuess : function (theClickedLetter, theSecretWord) {
       var numberLettersTheGuessDoesNotMatch = 0;
       for (var i=0; i<theSecretWord.length; i++) {
         if(theClickedLetter === (theSecretWord[i]).toUpperCase()){
-          console.log('match');
            $('#letter-'+i).html(theSecretWord[i]);
            game.numberOfCorrectGuesses ++;
            if (game.numberOfCorrectGuesses === theSecretWord.length) {
              game.endGame("You Win! ");
-             scoreBoard.incrementScore();
+             scoreBoard.incrementWinScore();
             }
           }
         else if (theClickedLetter !== (theSecretWord[i]).toUpperCase()){
@@ -52,13 +51,13 @@ $(document).ready(function() {
       if (numberLettersTheGuessDoesNotMatch === theSecretWord.length) {
         if (game.numberOfGuessesRemaining >= 1) {
           game.numberOfGuessesRemaining --;
-          console.log('miss');
           $('#numberOfGuessesRemaining').html(game.numberOfGuessesRemaining);
           $('#hangman-display').attr('src', 'images/Hangman-'+game.numberOfGuessesRemaining+'.png');
         }
       }
       if (game.numberOfGuessesRemaining === 0) {
         game.endGame('You Lose');
+        scoreBoard.incrementLoseScore();
       }
     },
     endGame : function (winOrLossMessage) {
@@ -69,8 +68,7 @@ $(document).ready(function() {
     },
     resetGame : function () {
       //called by reset button click
-      console.log('reset');
-      game.secretWord = createAndShowSecretWord.generateRandomSecretWord();
+      game.secretWord = secretWordStuff.generateRandomSecretWord();
       $('#hiddenLetterList').empty();
       $('#letterBoard').empty();
       game.numberOfGuessesRemaining = 6;
@@ -101,19 +99,28 @@ $(document).ready(function() {
 
 
   var scoreBoard = {
-    score : 0,
-    incrementScore : function() {
-      score++;
-      //update HTML
+    gamesWon : 0,
+    gamesLost : 0,
+    incrementWinScore : function() {
+      scoreBoard.gamesWon++;
+      $('#number-of-games-won').html(scoreBoard.gamesWon);
     },
-
+    incrementLoseScore : function() {
+      scoreBoard.gamesLost++;
+      $('#number-of-games-lost').html(scoreBoard.gamesLost);
+    },
+    resetScore : function() {
+      scoreBoard.gamesWon = 0;
+      scoreBoard.gamesLost = 0;
+      $('#number-of-games-won').html(scoreBoard.gamesWon);
+      $('#number-of-games-lost').html(scoreBoard.gamesLost);
+    }
   };
 
 
 
   var buttonHandlers = {
     startClickHandler : function(event) {
-      event.preventDefault();
       game.startGame();
     },
     letterClickHandler : function (event) {
@@ -134,6 +141,9 @@ $(document).ready(function() {
       } else if (game.isOngoing === false) {
         game.resetGame();
       }
+    },
+    resetScoreBoardHandler : function(event) {
+      scoreBoard.resetScore();
     }
   };
 
@@ -141,6 +151,7 @@ $(document).ready(function() {
   $('#startButton').on('click', buttonHandlers.startClickHandler);
   $('#letterBoard').on('click', buttonHandlers.letterClickHandler);
   $('#buttonContainer').on('click', '#resetButton', buttonHandlers.resetClickHandler);
+  $('#reset-score-board').on('click', buttonHandlers.resetScoreBoardHandler);
 
 
 
