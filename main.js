@@ -4,7 +4,6 @@ $(document).ready(function() {
   var createAndShowSecretWord = {
     wordBank : ['tacos', 'watermelon', 'hat'],
     generateRandomSecretWord : function () {
-
       var randomIndexNumber = Math.floor(createAndShowSecretWord.wordBank.length*(Math.random()));
       secretWord = createAndShowSecretWord.wordBank[randomIndexNumber];
       return secretWord;
@@ -30,7 +29,7 @@ $(document).ready(function() {
         game.createLetterBoard();
         createAndShowSecretWord.showHiddenLetterList();
         $('#startButton').remove();
-        $('#buttonContainer').append('<button id="resetButton">Reset Game</button>');
+        $('#buttonContainer').html('<button id="resetButton">Reset Game</button>');
       } else if (game.isOngoing === true) {
         return;
       }
@@ -77,12 +76,15 @@ $(document).ready(function() {
       alert('game over');
       game.isOngoing = false;
       $('#letterBoard').html('');
+      $('#hiddenLetterList').html(game.secretWord);
 
     },
 
     resetGame : function () {
       //called by reset button click
       console.log('reset');
+      game.SecretWord = createAndShowSecretWord.generateRandomSecretWord();
+      game.startGame();
     }
 
   };
