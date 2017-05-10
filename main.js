@@ -79,7 +79,7 @@ $(document).ready(function() {
     resetGame : function () {
       //called by reset button click
       console.log('reset');
-      game.SecretWord = createAndShowSecretWord.generateRandomSecretWord();
+      game.secretWord = createAndShowSecretWord.generateRandomSecretWord();
       $('#hiddenLetterList').empty();
       $('#letterBoard').empty();
       game.numberOfGuessesRemaining = 6;
