@@ -24,15 +24,11 @@ $(document).ready(function() {
     isOngoing : false,
     startGame : function () {
       // called by start button click handler
-      if (game.isOngoing === false) {
         game.isOngoing = true;
         game.createLetterBoard();
         createAndShowSecretWord.showHiddenLetterList();
         $('#startButton').remove();
         $('#buttonContainer').html('<button id="resetButton">Reset Game</button>');
-      } else if (game.isOngoing === true) {
-        return;
-      }
     },
 
     createLetterBoard : function() {
@@ -53,8 +49,7 @@ $(document).ready(function() {
            $('#letter-'+i).html(theSecretWord[i]);
            game.numberOfCorrectGuesses ++;
            if (game.numberOfCorrectGuesses === theSecretWord.length) {
-             alert('you win!');
-             game.endGame();
+             game.endGame("You Win! ");
             }
           }
         else if (theClickedLetter !== (theSecretWord[i]).toUpperCase()){
@@ -62,20 +57,21 @@ $(document).ready(function() {
         }
       }
       if (numberLettersTheGuessDoesNotMatch === theSecretWord.length) {
-        console.log('miss');
-        game.numberOfGuessesRemaining --;
-        $('#numberOfGuessesRemaining').html(game.numberOfGuessesRemaining);
+        if (game.numberOfGuessesRemaining >= 1) {
+          game.numberOfGuessesRemaining --;
+          console.log('miss');
+          $('#numberOfGuessesRemaining').html(game.numberOfGuessesRemaining);
+        }
       }
       if (game.numberOfGuessesRemaining === 0) {
-        alert('you lose');
-        game.endGame();
+        game.endGame('You Lose');
       }
     },
 
-    endGame : function () {
-      alert('game over');
+    endGame : function (winOrLossMessage) {
       game.isOngoing = false;
-      $('#letterBoard').html('');
+      $('#letterBoard').prop('disabled', true);
+      $('#letterBoard').html('<span class="winOrLossMessage">'+winOrLossMessage+'</span>');
       $('#hiddenLetterList').html(game.secretWord);
 
     },
@@ -84,6 +80,11 @@ $(document).ready(function() {
       //called by reset button click
       console.log('reset');
       game.SecretWord = createAndShowSecretWord.generateRandomSecretWord();
+      $('#hiddenLetterList').empty();
+      $('#letterBoard').empty();
+      game.numberOfGuessesRemaining = 6;
+      $('#numberOfGuessesRemaining').html(game.numberOfGuessesRemaining);
+      game.numberOfCorrectGuesses = 0;
       game.startGame();
     }
 
@@ -97,9 +98,11 @@ $(document).ready(function() {
       for (var i=0; i<letterBoard.lettersArray.length; i++) {
         $('#letterBoard').append('<button class="btn">'+letterBoard.lettersArray[i]+'</button>');
       }
+      $('#letterBoard').prop('disabled', false);
     },
     disableGuessedLetters : function (theClickedLetter) {
       theClickedLetter.addClass('btn disabled');
+      theClickedLetter.prop('disabled', true);
     }
   };
 
@@ -118,11 +121,12 @@ $(document).ready(function() {
       game.startGame();
     },
     letterClickHandler : function (event) {
-      event.preventDefault();
+      event.stopPropagation();
       var $theClickedLetter = $(event.target);
-      game.evaluateGuess($theClickedLetter.html(), game.secretWord);
-      console.log($theClickedLetter.html());
-      letterBoard.disableGuessedLetters($theClickedLetter);
+      if (game.isOngoing === true) {
+        game.evaluateGuess($theClickedLetter.html(), game.secretWord);
+        letterBoard.disableGuessedLetters($theClickedLetter);
+      }
     }
   };
 
