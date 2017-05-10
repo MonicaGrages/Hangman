@@ -29,6 +29,7 @@ $(document).ready(function() {
         createAndShowSecretWord.showHiddenLetterList();
         $('#startButton').remove();
         $('#buttonContainer').html('<button id="resetButton">Reset Game</button>');
+        $('#letterBoard').prop('disabled', false);
     },
 
     createLetterBoard : function() {
@@ -102,8 +103,8 @@ $(document).ready(function() {
       $('#letterBoard').prop('disabled', false);
     },
     disableGuessedLetters : function (theClickedLetter) {
-      theClickedLetter.addClass('btn disabled');
-      theClickedLetter.prop('disabled', true);
+        theClickedLetter.addClass('btn disabled');
+        theClickedLetter.prop('disabled', true);
     }
   };
 
@@ -124,7 +125,7 @@ $(document).ready(function() {
     letterClickHandler : function (event) {
       event.stopPropagation();
       var $theClickedLetter = $(event.target);
-      if (game.isOngoing === true) {
+      if (game.isOngoing === true && $theClickedLetter.attr('id') !== 'letterBoard') {
         game.evaluateGuess($theClickedLetter.html(), game.secretWord);
         letterBoard.disableGuessedLetters($theClickedLetter);
       }
