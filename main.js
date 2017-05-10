@@ -49,6 +49,8 @@ $(document).ready(function() {
 
     numberOfGuessesRemaining : 6,
 
+    numerOfCorrectGuesses: 0,
+
     secretWord : createAndShowSecretWord.generateRandomSecretWord(),
 
     evaluateGuess : function (theClickedLetter, theSecretWord) {
@@ -56,21 +58,23 @@ $(document).ready(function() {
           if(theClickedLetter === (theSecretWord[i]).toUpperCase()) {
             console.log('match');
             $('#letter-'+i).html(theSecretWord[i]);
+            game.numerOfCorrectGuesses ++;
+            if (game.numerOfCorrectGuesses === theSecretWord.length) {
+              alert('you win!');
+            }
+            return;
           }
         }
-      //     return;
-      //   }
-      // }
-      // console.log('miss');
-      // game.numberOfGuessesRemaining --;
-      // $('#numberOfGuessesRemaining').html(game.numberOfGuessesRemaining);
-      // if (game.numberOfGuessesRemaining === 0) {
-      //   game.endGame();
-      // }
+      console.log('miss');
+      game.numberOfGuessesRemaining --;
+      $('#numberOfGuessesRemaining').html(game.numberOfGuessesRemaining);
+      if (game.numberOfGuessesRemaining === 0) {
+        game.endGame();
+      }
     },
 
     endGame : function () {
-      console.log('game over');
+      alert('game over');
       //win vs loss?
       //create reset button
       game.isOngoing = false;
