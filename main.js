@@ -40,7 +40,7 @@ $(document).ready(function() {
            $('#letter-'+i).html(theSecretWord[i]);
            game.numberOfCorrectGuesses ++;
            if (game.numberOfCorrectGuesses === theSecretWord.length) {
-             game.endGame("You Win! ");
+             game.endGame("You Win!");
              scoreBoard.incrementWinScore();
             }
           }

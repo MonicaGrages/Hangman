@@ -1,5 +1,8 @@
 main {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 header {
@@ -14,14 +17,26 @@ h1 {
   font-size: 130px;
 }
 
-.gameBoard {
-/*  width: 100%;*/
-  display: inline-block;
+.button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 90%;
+    font-size: 25px;
+
+}
+
+.game-board-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 120px;
 }
 
 .button {
   height: 40px;
-  margin-bottom: 30px;
+  width: 90px;
 }
 
 .letter {
@@ -35,11 +50,7 @@ h1 {
 
 #letterBoard {
   background-color: turquoise;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  text-align: center;
 }
 
 #hiddenLetterList {
@@ -49,7 +60,13 @@ h1 {
   font-family: 'Love Ya Like A Sister', cursive;
   text-transform: uppercase;
 }
+
+.winOrLossMessage {
+  font-size: 70px;
+}
 /*
 @media {
   need to change header size for smaller screens
+  and make hidden letter display smaller
+  make everything
 }*/
