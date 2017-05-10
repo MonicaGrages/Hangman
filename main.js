@@ -42,33 +42,36 @@ $(document).ready(function() {
     },
 
     createLetterBoard : function() {
-      //will make the letter board show up after game starts
-      //could just add a class to an already existing letter board that makes its visibility not hidden?
       letterBoard.showLetters();
     },
 
     numberOfGuessesRemaining : 6,
 
-    numerOfCorrectGuesses: 0,
+    numberOfCorrectGuesses: 0,
 
     secretWord : createAndShowSecretWord.generateRandomSecretWord(),
 
     evaluateGuess : function (theClickedLetter, theSecretWord) {
+      var lettersTheGuessDoesNotMatch = 0;
       for (var i=0; i<theSecretWord.length; i++) {
           if(theClickedLetter === (theSecretWord[i]).toUpperCase()){
             console.log('match');
             $('#letter-'+i).html(theSecretWord[i]);
-            game.numerOfCorrectGuesses ++;
-            if (game.numerOfCorrectGuesses === theSecretWord.length) {
+            game.numberOfCorrectGuesses ++;
+            if (game.numberOfCorrectGuesses === theSecretWord.length) {
               alert('you win!');
             }
-            return;
             //this needs to be fixed - does not recognize if correct letter appears more than once
           }
+        else if (theClickedLetter !== (theSecretWord[i]).toUpperCase()){
+          lettersTheGuessDoesNotMatch ++;
         }
-      console.log('miss');
-      game.numberOfGuessesRemaining --;
-      $('#numberOfGuessesRemaining').html(game.numberOfGuessesRemaining);
+      }
+      if (lettersTheGuessDoesNotMatch === theSecretWord.length) {
+        console.log('miss');
+        game.numberOfGuessesRemaining --;
+        $('#numberOfGuessesRemaining').html(game.numberOfGuessesRemaining);
+      }
       if (game.numberOfGuessesRemaining === 0) {
         game.endGame();
       }
@@ -93,11 +96,11 @@ $(document).ready(function() {
     lettersArray : ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
     showLetters : function() {
       for (var i=0; i<letterBoard.lettersArray.length; i++) {
-        $('#letterBoard').append('<button>'+letterBoard.lettersArray[i]+'</button>');
+        $('#letterBoard').append('<button class="btn">'+letterBoard.lettersArray[i]+'</button>');
       }
     },
     disableGuessedLetters : function (theClickedLetter) {
-      theClickedLetter.remove();
+      theClickedLetter.addClass('btn disabled');
     }
   };
 
