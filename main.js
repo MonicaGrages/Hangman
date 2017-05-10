@@ -68,7 +68,6 @@ $(document).ready(function() {
     },
     resetGame : function () {
       //called by reset button click
-      //can I add are you sure prompt if game.isOngoing === true?
       console.log('reset');
       game.secretWord = createAndShowSecretWord.generateRandomSecretWord();
       $('#hiddenLetterList').empty();
