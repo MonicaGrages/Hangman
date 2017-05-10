@@ -53,6 +53,7 @@ $(document).ready(function() {
           game.numberOfGuessesRemaining --;
           console.log('miss');
           $('#numberOfGuessesRemaining').html(game.numberOfGuessesRemaining);
+          $('#hangman-display').attr('src', 'images/Hangman-'+game.numberOfGuessesRemaining+'.png');
         }
       }
       if (game.numberOfGuessesRemaining === 0) {
