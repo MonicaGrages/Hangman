@@ -7,24 +7,23 @@
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>Hangman</h1>
+  <header class='page-header'>
+    <h1 class=>Hangman</h1>
   </header>
   <main class='container'>
     <div id='button-container'>
       <button id='startButton' class='button btn'>Start New Game</button>
       <div id='resetButtonContainer'></div>
     </div>
-    <div id='gameBoard'>
+    <div id='gameBoard' class='gameBoard'>
+      <img id='hangman-display' class='gameBoard' src='images/Hangman-6.png' alt='hangman-game-display'>
       <div id='letterBoard' class='gameBoard'>
       </div>
-      <div id='hiddenLetterList' class='gameBoard container'>
-      </div>
-      <div id='guessesRemainingDisplay'>
-      Number of incorrect guesses remaining: <span id='numberOfGuessesRemaining'>6</span>
-      </div>
     </div>
-    <img id='hangman-display' src='images/Hangman-6.png' alt='hangman-game-display'>
+    <div id='hiddenLetterList' class='container'></div>
+    <div id='guessesRemainingDisplay'>
+      Number of incorrect guesses remaining: <span id='numberOfGuessesRemaining'>6</span>
+    </div>
     <div id='score-board'>
       <p>Games Won: <span id='number-of-games-won'>0</span></p>
       <p>Games Lost: <span id='number-of-games-lost'>0</span></p>

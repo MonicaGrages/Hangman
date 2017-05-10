@@ -8,17 +8,20 @@ header {
 
 h1 {
   font-family: 'Love Ya Like A Sister', cursive;
-  font-size: 140px;
+  color: turquoise;
   text-transform: uppercase;
   letter-spacing: 10px;
+  font-size: 130px;
 }
 
 .gameBoard {
-  width: 100%;
+/*  width: 100%;*/
+  display: inline-block;
 }
 
 .button {
   height: 40px;
+  margin-bottom: 30px;
 }
 
 .letter {
@@ -26,6 +29,8 @@ h1 {
   height: 50px;
   margin: 10px;
   font-family: 'Love Ya Like A Sister', cursive;
+  font-size: 30px;
+  font-weight: 800;
 }
 
 #letterBoard {
@@ -44,3 +49,7 @@ h1 {
   font-family: 'Love Ya Like A Sister', cursive;
   text-transform: uppercase;
 }
+/*
+@media {
+  need to change header size for smaller screens
+}*/
