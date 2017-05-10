@@ -55,7 +55,7 @@ $(document).ready(function() {
 
     evaluateGuess : function (theClickedLetter, theSecretWord) {
       for (var i=0; i<theSecretWord.length; i++) {
-          if(theClickedLetter === (theSecretWord[i]).toUpperCase()) {
+          if(theClickedLetter === (theSecretWord[i]).toUpperCase()){
             console.log('match');
             $('#letter-'+i).html(theSecretWord[i]);
             game.numerOfCorrectGuesses ++;
@@ -63,6 +63,7 @@ $(document).ready(function() {
               alert('you win!');
             }
             return;
+            //this needs to be fixed - does not recognize if correct letter appears more than once
           }
         }
       console.log('miss');
@@ -95,6 +96,9 @@ $(document).ready(function() {
         $('#letterBoard').append('<button>'+letterBoard.lettersArray[i]+'</button>');
       }
     },
+    disableGuessedLetters : function (theClickedLetter) {
+      theClickedLetter.remove();
+    }
   };
 
 
@@ -119,6 +123,7 @@ $(document).ready(function() {
       var $theClickedLetter = $(event.target);
       game.evaluateGuess($theClickedLetter.html(), game.secretWord);
       console.log($theClickedLetter.html());
+      letterBoard.disableGuessedLetters($theClickedLetter);
     }
   };
 
