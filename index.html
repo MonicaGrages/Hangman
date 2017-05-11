@@ -2,8 +2,8 @@
 <html>
 <head>
   <title>Play Hangman</title>
-<!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
- -->  <link href="https://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
@@ -17,14 +17,14 @@
   <main class='container'>
     <div id='button-container' class='button-container'>
       <div id='resetButtonContainer'>
-        <button id='startButton' class='button btn'>Start New Game</button>
+        <button id='startButton' class='button'>Start New Game</button>
       </div>
       <div id='guessesRemainingDisplay'>
         Incorrect guesses remaining: <span id='numberOfGuessesRemaining'>6</span>
       </div>
       <p id='games-won'>Games Won: <span id='number-of-games-won'>0</span></p>
       <p>Games Lost: <span id='number-of-games-lost'>0</span></p>
-      <button id='reset-score-board' class='button btn'>Reset Score Board</button>
+      <button id='reset-score-board' class='button'>Reset Score Board</button>
     </div>
     <div id='gameBoard' class='game-board-wrapper'>
       <img id='hangman-display' src='images/Hangman-easy-6.png' alt='hangman-game-display'>
@@ -33,12 +33,16 @@
     </div>
     <div id='hiddenLetterList' class='container'></div>
   </main>
-  <footer></footer>
+  <footer>
+    <div class='footer'>
+     <p>Made with &hearts; at GA by <span id='name'>Monica Grages</span></p>
+     <p>Connect with me on <a class='footer-link' href='https://www.linkedin.com/in/monicagrages/'>LinkedIn</a> or <a class ='footer-link' href='https://github.com/MonicaGrages'>Github</a></p>
+    </div>
+  </footer>
   <script
   src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>
-  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
   <script src='main.js'></script>
 </body>
 </html>
