@@ -10,6 +10,9 @@ $(document).ready(function() {
     },
     getSecretWordFromUser : function (){
       secretWord = prompt ("Enter your secret word here. Make sure your opponent doesn't see what you are typing.");
+      if (secretWord.length < 3) {
+        secretWord = prompt("That's too easy. Try entering a secret word with at least 3 letters");
+      }
       return secretWord;
     },
     showHiddenLetterList : function() {
@@ -25,10 +28,12 @@ $(document).ready(function() {
   var game = {
     isOngoing : false,
     startGame : function () {
-        if (difficulty.difficultyLevel === 'two-player') {
+        game.isOngoing = true;
+        if (difficulty.difficultyLevel === 'easy' || 'hard') {
+          game.secretWord = secretWordStuff.generateRandomSecretWord();
+        } else if (difficulty.difficultyLevel === 'two-player') {
           game.secretWord = secretWordStuff.getSecretWordFromUser();
         }
-        game.isOngoing = true;
         secretWordStuff.showHiddenLetterList();
         letterBoard.showLetters();
         $('#startButton').remove();
@@ -37,7 +42,7 @@ $(document).ready(function() {
     },
     numberOfGuessesRemaining : 6,
     numberOfCorrectGuesses: 0,
-    secretWord : secretWordStuff.generateRandomSecretWord(),
+    // secretWord : secretWordStuff.generateRandomSecretWord(),
     evaluateGuess : function (theClickedLetter, theSecretWord) {
       var numberLettersTheGuessDoesNotMatch = 0;
       for (var i=0; i<theSecretWord.length; i++) {
