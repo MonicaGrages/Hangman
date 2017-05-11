@@ -1,5 +1,6 @@
 body {
   background-color: #fd5c53; /*coral*/
+  margin: 0;
 }
 
 main {
@@ -122,6 +123,10 @@ button:hover {
   justify-content: space-between;
   align-items: center;
   font-size: 20px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .footer-link {

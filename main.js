@@ -11,7 +11,12 @@ $(document).ready(function() {
     getSecretWordFromUser : function (){
       secretWord = prompt ("Enter your secret word here. Make sure your opponent doesn't see what you are typing.");
       if (secretWord.length < 3) {
-        secretWord = prompt("That's too easy. Try entering a secret word with at least 3 letters");
+        secretWord = prompt("That's too easy. Try entering a secret word with at least 3 letters.");
+      }
+      for (var i=0; i< secretWord.length; i++) { //secret word should be one word only, no spaces
+        if (secretWord[i] === " ") {
+          secretWord = prompt ('Try entering one word only, without any spaces.');
+        }
       }
       return secretWord;
     },
