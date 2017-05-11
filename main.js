@@ -65,6 +65,7 @@ $(document).ready(function() {
       $('#letterBoard').prop('disabled', true);
       $('#letterBoard').html('<span class="winOrLossMessage">'+winOrLossMessage+'</span>');
       $('#hiddenLetterList').html(game.secretWord);
+      $('#resetButton').html('Play Again');
     },
     resetGame : function () {
       //called by reset button click
