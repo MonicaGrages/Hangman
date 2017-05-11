@@ -67,7 +67,6 @@ h1 {
 
 @media only screen and (max-device-width : 480px) {
   body {
-    background-color: pink;
   }
   .game-board-wrapper {
     flex-direction: column;
@@ -78,6 +77,7 @@ h1 {
   }
   .button-container {
     flex-direction: column;
+    order: 5;
   }
 }
 
