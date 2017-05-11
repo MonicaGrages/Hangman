@@ -16,6 +16,7 @@ $(document).ready(function() {
       return secretWord;
     },
     showHiddenLetterList : function() {
+      console.log('show hidden letter thinks it is: '+game.secretWord);
       var hiddenLetterArray = [];
       for (var i=0; i<game.secretWord.length; i++) {
         hiddenLetterArray.push('_ ');
@@ -28,21 +29,23 @@ $(document).ready(function() {
   var game = {
     isOngoing : false,
     startGame : function () {
-        game.isOngoing = true;
-        if (difficulty.difficultyLevel === 'easy' || 'hard') {
-          game.secretWord = secretWordStuff.generateRandomSecretWord();
-        } else if (difficulty.difficultyLevel === 'two-player') {
-          game.secretWord = secretWordStuff.getSecretWordFromUser();
-        }
-        secretWordStuff.showHiddenLetterList();
-        letterBoard.showLetters();
-        $('#startButton').remove();
-        $('#resetButtonContainer').html('<button id="resetButton" class="button">Reset Game</button>');
-        $('#letterBoard').prop('disabled', false);
+      console.log(difficulty.difficultyLevel === 'two-player');
+      if (difficulty.difficultyLevel === 'two-player') {
+        game.secretWord = secretWordStuff.getSecretWordFromUser();
+      } else {
+        game.secretWord = secretWordStuff.generateRandomSecretWord();
+      }
+      console.log('startGame thinks it is: '+game.secretWord);
+      game.isOngoing = true;
+      secretWordStuff.showHiddenLetterList();
+      letterBoard.showLetters();
+      $('#startButton').remove();
+      $('#resetButtonContainer').html('<button id="resetButton" class="button">Reset Game</button>');
+      $('#letterBoard').prop('disabled', false);
     },
     numberOfGuessesRemaining : 6,
     numberOfCorrectGuesses: 0,
-    // secretWord : secretWordStuff.generateRandomSecretWord(),
+    secretWord : secretWordStuff.generateRandomSecretWord(),
     evaluateGuess : function (theClickedLetter, theSecretWord) {
       var numberLettersTheGuessDoesNotMatch = 0;
       for (var i=0; i<theSecretWord.length; i++) {
@@ -80,13 +83,14 @@ $(document).ready(function() {
     resetGame : function () {
       //called by reset/play again button click or difficulty level change
       if (difficulty.difficultyLevel === 'two-player') {
-        game.theSecretWord = secretWordStuff.getSecretWordFromUser();
+        game.secretWord = secretWordStuff.getSecretWordFromUser();
+        console.log('resetGame thinks secret word is: '+game.secretWord);
       } else {
         game.secretWord = secretWordStuff.generateRandomSecretWord();
       }
       $('#hiddenLetterList').empty();
       $('#letterBoard').empty();
-      if (difficulty.difficultyLevel === 'easy' || 'two-player') {
+      if (difficulty.difficultyLevel === 'easy' || difficulty.difficultyLevel ==='two-player') {
         game.numberOfGuessesRemaining = 6;
       } else if (difficulty.difficultyLevel === 'hard') {
         game.numberOfGuessesRemaining = 4;
@@ -94,7 +98,14 @@ $(document).ready(function() {
       $('#numberOfGuessesRemaining').html(game.numberOfGuessesRemaining);
       $('#hangman-display').attr('src', "images/Hangman-easy-6.png");
       game.numberOfCorrectGuesses = 0;
-      game.startGame();
+      game.isOngoing = true;
+      secretWordStuff.showHiddenLetterList();
+      letterBoard.showLetters();
+      $('#startButton').remove();
+      $('#resetButtonContainer').html('<button id="resetButton" class="button">Reset Game</button>');
+      $('#letterBoard').prop('disabled', false);
+      // game.startGame();
+
     }
   };
 
@@ -192,6 +203,11 @@ $(document).ready(function() {
 
   var buttonHandlers = {
     startClickHandler : function(event) {
+      //  if (difficulty.difficultyLevel === 'easy' || difficulty.difficultyLevel ==='hard') {
+      //   game.secretWord = secretWordStuff.generateRandomSecretWord();
+      // } else if (difficulty.difficultyLevel === 'two-player') {
+      //   game.secretWord = secretWordStuff.getSecretWordFromUser();
+      // }
       game.startGame();
     },
     letterClickHandler : function (event) {
