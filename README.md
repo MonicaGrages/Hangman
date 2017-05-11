@@ -11,7 +11,7 @@ My initial mockups were a little messy:
 
 
 But the finished product is more polished:
-![alt text](http://i.imgur.com/JECsfjT.png "Hangman Game Screenshot")
+![alt text](http://i.imgur.com/M9ZpTDL.png "Hangman Game Screenshot")
 
 
 #### This project was created using JavaScript and JQuery
