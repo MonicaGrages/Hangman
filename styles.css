@@ -17,6 +17,23 @@ h1 {
   font-size: 130px;
 }
 
+.difficulty-button {
+  text-decoration: none;
+  font-size: 30px;
+  margin-right: 20px;
+  margin-left: 20px;
+  color: black;
+}
+
+.difficulty-button:hover {
+  font-weight: 800;
+}
+
+a.clicked {
+  text-decoration: underline;
+
+}
+
 .button-container {
     display: flex;
     flex-direction: row;

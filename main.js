@@ -96,7 +96,38 @@ $(document).ready(function() {
     }
   };
 
-
+  var difficulty = {
+    difficultyLevel : 'easy',
+    setDifficulty : function(theClickedDifficulty) {
+      //only change difficulty if game is not ongoing, or if player confirms game reset
+      if (game.isOngoing === true) {
+        if (confirm("Are you sure? This will reset your game.") === true) {
+          theClickedDifficulty.addClass('clicked');
+          if (theClickedDifficulty.attr('id') === 'hard') {
+            difficulty.difficultyLevel = 'hard';
+            $('#easy').removeClass('clicked');
+          } else if (theClickedDifficulty.attr('id') === 'easy') {
+            difficulty.difficultyLevel = 'easy';
+            $('#hard').removeClass('clicked');
+          }
+          difficulty.handleDifficultyChange();
+        }
+      } else if (game.isOngoing === false) {
+        theClickedDifficulty.addClass('clicked');
+        if (theClickedDifficulty.attr('id') === 'hard') {
+          difficulty.difficultyLevel = 'hard';
+          $('#easy').removeClass('clicked');
+        } else if (theClickedDifficulty.attr('id') === 'easy') {
+          difficulty.difficultyLevel = 'easy';
+          $('#hard').removeClass('clicked');
+        }
+      }
+    },
+    handleDifficultyChange : function () {
+      game.resetGame();
+      console.log('change difficulty and reset game')
+    }
+  }
 
 
   var scoreBoard = {
@@ -145,6 +176,17 @@ $(document).ready(function() {
     },
     resetScoreBoardHandler : function(event) {
       scoreBoard.resetScore();
+    },
+    difficultyButtonHandler : function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      var $theClickedDifficultyButton = $(event.target);
+      //only change the difficulty if different from the current difficulty
+      if ($theClickedDifficultyButton.attr('id') === difficulty.difficultyLevel) {
+        return;
+      } else if ($theClickedDifficultyButton.attr('id') !== difficulty.difficultyLevel) {
+        difficulty.setDifficulty($theClickedDifficultyButton);
+      }
     }
   };
 
@@ -153,6 +195,7 @@ $(document).ready(function() {
   $('#letterBoard').on('click', buttonHandlers.letterClickHandler);
   $('#resetButtonContainer').on('click', '#resetButton', buttonHandlers.resetClickHandler);
   $('#reset-score-board').on('click', buttonHandlers.resetScoreBoardHandler);
+  $('.difficulty-button').on('click', buttonHandlers.difficultyButtonHandler);
 
 
 
