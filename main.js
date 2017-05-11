@@ -68,11 +68,15 @@ $(document).ready(function() {
       $('#resetButton').html('Play Again');
     },
     resetGame : function () {
-      //called by reset button click
+      //called by reset button click or difficulty level change
       game.secretWord = secretWordStuff.generateRandomSecretWord();
       $('#hiddenLetterList').empty();
       $('#letterBoard').empty();
-      game.numberOfGuessesRemaining = 6;
+      if (difficulty.difficultyLevel === 'easy') {
+        game.numberOfGuessesRemaining = 6;
+      } else if (difficulty.difficultyLevel === 'hard') {
+        game.numberOfGuessesRemaining = 4;
+      }
       $('#numberOfGuessesRemaining').html(game.numberOfGuessesRemaining);
       $('#hangman-display').attr('src', "images/Hangman-6.png");
       game.numberOfCorrectGuesses = 0;
@@ -110,22 +114,21 @@ $(document).ready(function() {
             difficulty.difficultyLevel = 'easy';
             $('#hard').removeClass('clicked');
           }
-          difficulty.handleDifficultyChange();
+          game.resetGame();
         }
       } else if (game.isOngoing === false) {
         theClickedDifficulty.addClass('clicked');
         if (theClickedDifficulty.attr('id') === 'hard') {
           difficulty.difficultyLevel = 'hard';
           $('#easy').removeClass('clicked');
+          if (game.numberOfGuessesRemaining !==0) {game.numberOfGuessesRemaining = 4;}
         } else if (theClickedDifficulty.attr('id') === 'easy') {
           difficulty.difficultyLevel = 'easy';
           $('#hard').removeClass('clicked');
+          if (game.numberOfGuessesRemaining !==0) {game.numberOfGuessesRemaining = 6;}
         }
+        $('#numberOfGuessesRemaining').html(game.numberOfGuessesRemaining);
       }
-    },
-    handleDifficultyChange : function () {
-      game.resetGame();
-      console.log('change difficulty and reset game')
     }
   }
 
