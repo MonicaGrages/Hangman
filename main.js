@@ -8,8 +8,6 @@ $(document).ready(function() {
       secretWord = secretWordStuff.wordBank[randomIndexNumber];
       return secretWord;
     },
-
-
     showHiddenLetterList : function() {
       var hiddenLetterArray = [];
       for (var i=0; i<game.secretWord.length; i++) {
@@ -99,6 +97,8 @@ $(document).ready(function() {
         theClickedLetter.prop('disabled', true);
     }
   };
+
+
 
   var difficulty = {
     difficultyLevel : 'easy',
@@ -206,6 +206,4 @@ $(document).ready(function() {
   $('.difficulty-button').on('click', buttonHandlers.difficultyButtonHandler);
 
 
-
-//below is the end of the document.ready function
 });
