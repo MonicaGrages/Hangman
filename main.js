@@ -25,6 +25,9 @@ $(document).ready(function() {
   var game = {
     isOngoing : false,
     startGame : function () {
+        if (difficulty.difficultyLevel === 'two-player') {
+          game.secretWord = secretWordStuff.getSecretWordFromUser();
+        }
         game.isOngoing = true;
         secretWordStuff.showHiddenLetterList();
         letterBoard.showLetters();
@@ -71,10 +74,14 @@ $(document).ready(function() {
     },
     resetGame : function () {
       //called by reset/play again button click or difficulty level change
-      game.secretWord = secretWordStuff.generateRandomSecretWord();
+      if (difficulty.difficultyLevel === 'two-player') {
+        game.theSecretWord = secretWordStuff.getSecretWordFromUser();
+      } else {
+        game.secretWord = secretWordStuff.generateRandomSecretWord();
+      }
       $('#hiddenLetterList').empty();
       $('#letterBoard').empty();
-      if (difficulty.difficultyLevel === 'easy') {
+      if (difficulty.difficultyLevel === 'easy' || 'two-player') {
         game.numberOfGuessesRemaining = 6;
       } else if (difficulty.difficultyLevel === 'hard') {
         game.numberOfGuessesRemaining = 4;
@@ -114,9 +121,15 @@ $(document).ready(function() {
           if (theClickedDifficulty.attr('id') === 'hard') {
             difficulty.difficultyLevel = 'hard';
             $('#easy').removeClass('clicked');
+            $('#two-player').removeClass('clicked');
           } else if (theClickedDifficulty.attr('id') === 'easy') {
             difficulty.difficultyLevel = 'easy';
             $('#hard').removeClass('clicked');
+            $('#two-player').removeClass('clicked');
+          } else if (theClickedDifficulty.attr('id') === 'two-player') {
+            difficulty.difficultyLevel = 'two-player';
+            $('#hard').removeClass('clicked');
+            $('#easy').removeClass('clicked');
           }
           game.resetGame();
         }
@@ -125,6 +138,7 @@ $(document).ready(function() {
         if (theClickedDifficulty.attr('id') === 'hard') {
           difficulty.difficultyLevel = 'hard';
           $('#easy').removeClass('clicked');
+          $('#two-player').removeClass('clicked');
           //don't change the number of guesses remaining if you are on the win/lose screen
           if (game.numberOfGuessesRemaining !==0 && game.numberOfCorrectGuesses !== game.secretWord.length)
             {game.numberOfGuessesRemaining = 4;
@@ -132,8 +146,16 @@ $(document).ready(function() {
         } else if (theClickedDifficulty.attr('id') === 'easy') {
           difficulty.difficultyLevel = 'easy';
           $('#hard').removeClass('clicked');
-          if (game.numberOfGuessesRemaining !==0 && game.numberOfCorrectGuesses !== game.secretWord.length)
-            {game.numberOfGuessesRemaining = 6;
+          $('#two-player').removeClass('clicked');
+          if (game.numberOfGuessesRemaining !==0 && game.numberOfCorrectGuesses !== game.secretWord.length) {
+            game.numberOfGuessesRemaining = 6;
+          }
+        } else if (theClickedDifficulty.attr('id') === 'two-player') {
+          difficulty.difficultyLevel = 'two-player';
+          $('#hard').removeClass('clicked');
+          $('#easy').removeClass('clicked');
+          if (game.numberOfGuessesRemaining !==0 && game.numberOfCorrectGuesses !== game.secretWord.length) {
+            game.numberOfGuessesRemaining = 6;
           }
         }
         $('#numberOfGuessesRemaining').html(game.numberOfGuessesRemaining);
@@ -200,10 +222,6 @@ $(document).ready(function() {
         difficulty.setDifficulty($theClickedDifficultyButton);
       }
     },
-    twoPlayerButtonHandler : function(event) {
-      game.secretWord = secretWordStuff.getSecretWordFromUser();
-      game.startGame();
-    }
   };
 
 
@@ -212,8 +230,6 @@ $(document).ready(function() {
   $('#resetButtonContainer').on('click', '#resetButton', buttonHandlers.resetClickHandler);
   $('#reset-score-board').on('click', buttonHandlers.resetScoreBoardHandler);
   $('.difficulty-button').on('click', buttonHandlers.difficultyButtonHandler);
-  $('#two-player').on('click', buttonHandlers.twoPlayerButtonHandler);
-
 
 
 });
