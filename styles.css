@@ -64,6 +64,24 @@ h1 {
 .winOrLossMessage {
   font-size: 70px;
 }
+
+@media only screen and (max-device-width : 480px) {
+  body {
+    background-color: pink;
+  }
+  .game-board-wrapper {
+    flex-direction: column;
+    margin-right: 0;
+  }
+  #letterBoard {
+    width: 80%;
+  }
+  .button-container {
+    flex-direction: column;
+  }
+}
+
+
 /*
 @media {
   need to change header size for smaller screens
