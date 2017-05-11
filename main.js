@@ -48,11 +48,11 @@ $(document).ready(function() {
           numberLettersTheGuessDoesNotMatch ++;
         }
       }
-      if (numberLettersTheGuessDoesNotMatch === theSecretWord.length) {
-        if (game.numberOfGuessesRemaining >= 1) {
+      if (numberLettersTheGuessDoesNotMatch === theSecretWord.length) { //if the guessed letter matches none of the letters in the secret word
+        if (game.numberOfGuessesRemaining >= 1) { //don't continue to decrement # guesses left if you get to 0
           game.numberOfGuessesRemaining --;
           $('#numberOfGuessesRemaining').html(game.numberOfGuessesRemaining);
-          $('#hangman-display').attr('src', 'images/Hangman-'+game.numberOfGuessesRemaining+'.png');
+          $('#hangman-display').attr('src', 'images/Hangman-'+difficulty.difficultyLevel+'-'+game.numberOfGuessesRemaining+'.png');
         }
       }
       if (game.numberOfGuessesRemaining === 0) {
@@ -78,7 +78,7 @@ $(document).ready(function() {
         game.numberOfGuessesRemaining = 4;
       }
       $('#numberOfGuessesRemaining').html(game.numberOfGuessesRemaining);
-      $('#hangman-display').attr('src', "images/Hangman-6.png");
+      $('#hangman-display').attr('src', "images/Hangman-easy-6.png");
       game.numberOfCorrectGuesses = 0;
       game.startGame();
     }
@@ -121,6 +121,7 @@ $(document).ready(function() {
         if (theClickedDifficulty.attr('id') === 'hard') {
           difficulty.difficultyLevel = 'hard';
           $('#easy').removeClass('clicked');
+          //don't change the number of guesses remaining if you are on the win/lose screen
           if (game.numberOfGuessesRemaining !==0 && game.numberOfCorrectGuesses !== game.secretWord.length)
             {game.numberOfGuessesRemaining = 4;
           }
