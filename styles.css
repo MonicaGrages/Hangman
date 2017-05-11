@@ -28,11 +28,12 @@ h1 {
 }
 
 .difficulty-button:hover {
-  font-weight: 800;
+  text-decoration: underline;
 }
 
 a.clicked {
   text-decoration: underline;
+  font-weight: 800;
 
 }
 

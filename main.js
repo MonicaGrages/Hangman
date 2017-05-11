@@ -68,7 +68,7 @@ $(document).ready(function() {
       $('#resetButton').html('Play Again');
     },
     resetGame : function () {
-      //called by reset button click or difficulty level change
+      //called by reset/play again button click or difficulty level change
       game.secretWord = secretWordStuff.generateRandomSecretWord();
       $('#hiddenLetterList').empty();
       $('#letterBoard').empty();
@@ -121,11 +121,15 @@ $(document).ready(function() {
         if (theClickedDifficulty.attr('id') === 'hard') {
           difficulty.difficultyLevel = 'hard';
           $('#easy').removeClass('clicked');
-          if (game.numberOfGuessesRemaining !==0) {game.numberOfGuessesRemaining = 4;}
+          if (game.numberOfGuessesRemaining !==0 && game.numberOfCorrectGuesses !== game.secretWord.length)
+            {game.numberOfGuessesRemaining = 4;
+          }
         } else if (theClickedDifficulty.attr('id') === 'easy') {
           difficulty.difficultyLevel = 'easy';
           $('#hard').removeClass('clicked');
-          if (game.numberOfGuessesRemaining !==0) {game.numberOfGuessesRemaining = 6;}
+          if (game.numberOfGuessesRemaining !==0 && game.numberOfCorrectGuesses !== game.secretWord.length)
+            {game.numberOfGuessesRemaining = 6;
+          }
         }
         $('#numberOfGuessesRemaining').html(game.numberOfGuessesRemaining);
       }
