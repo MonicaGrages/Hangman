@@ -7,6 +7,7 @@
 [Click here to see the Trello board for this project](https://trello.com/b/FaMcXkwt/wdi-project-1)
 
 My initial mockups were a little messy:
+![alt text](http://i.imgur.com/CJ8A5HX.jpg "Hangman Game Mockup")
 
 
 But the finished product is more polished:
@@ -14,3 +15,5 @@ But the finished product is more polished:
 
 
 #### This project was created using JavaScript and JQuery
+
+#### In version 2, I plan to add a two-player mode in which players can choose their own secret words for one another to guess
