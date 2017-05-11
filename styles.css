@@ -54,6 +54,10 @@ h1 {
 #letterBoard {
   background-color: turquoise;
   text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
 }
 
 #hiddenLetterList {

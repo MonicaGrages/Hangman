@@ -2,7 +2,7 @@ $(document).ready(function() {
 
 
   var secretWordStuff = {
-    wordBank : ['tacos', 'watermelon', 'hat'],
+    wordBank : ['tacos', 'watermelon', 'hat', 'advice', 'javascript', 'array', 'podcast', 'grandmother', 'wolf', 'satellite'],
     generateRandomSecretWord : function () {
       var randomIndexNumber = Math.floor(secretWordStuff.wordBank.length*(Math.random()));
       secretWord = secretWordStuff.wordBank[randomIndexNumber];
