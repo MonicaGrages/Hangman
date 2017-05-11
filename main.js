@@ -8,6 +8,10 @@ $(document).ready(function() {
       secretWord = secretWordStuff.wordBank[randomIndexNumber];
       return secretWord;
     },
+    getSecretWordFromUser : function (){
+      secretWord = prompt ("Enter your secret word here. Make sure your opponent doesn't see what you are typing.");
+      return secretWord;
+    },
     showHiddenLetterList : function() {
       var hiddenLetterArray = [];
       for (var i=0; i<game.secretWord.length; i++) {
@@ -195,6 +199,10 @@ $(document).ready(function() {
       } else if ($theClickedDifficultyButton.attr('id') !== difficulty.difficultyLevel) {
         difficulty.setDifficulty($theClickedDifficultyButton);
       }
+    },
+    twoPlayerButtonHandler : function(event) {
+      game.secretWord = secretWordStuff.getSecretWordFromUser();
+      game.startGame();
     }
   };
 
@@ -204,6 +212,8 @@ $(document).ready(function() {
   $('#resetButtonContainer').on('click', '#resetButton', buttonHandlers.resetClickHandler);
   $('#reset-score-board').on('click', buttonHandlers.resetScoreBoardHandler);
   $('.difficulty-button').on('click', buttonHandlers.difficultyButtonHandler);
+  $('#two-player').on('click', buttonHandlers.twoPlayerButtonHandler);
+
 
 
 });
