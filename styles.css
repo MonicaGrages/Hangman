@@ -113,6 +113,10 @@ button:hover {
   background-color: #a9a9a9; /*gray*/
 }
 
+.hangman-display {
+  margin-right: 40px;
+}
+
 .footer {
   background-color: #a9a9a9;
   margin: 0;
