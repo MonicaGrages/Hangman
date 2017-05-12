@@ -98,7 +98,7 @@ a.clicked {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 70px;
+/*  margin-bottom: 70px;*/
 }
 
 #hiddenLetterList {
@@ -107,6 +107,15 @@ a.clicked {
   font-size: 100px;
   font-family: 'Love Ya Like A Sister', cursive;
   text-transform: uppercase;
+}
+
+#hintButton {
+  margin-left: 40px;
+}
+
+#containerForHint {
+  margin-bottom: 70px;
+  font-size: 60px;
 }
 
 .winOrLossMessage {

@@ -89,6 +89,7 @@ $(document).ready(function() {
     },
     resetGame : function () {
       //called by reset/play again button click or difficulty level change
+      $('#containerForHint').empty(); //if there was a hint, delete it
       if (difficulty.difficultyLevel === 'two-player') {
         game.secretWord = secretWordStuff.getSecretWordFromUser();
       } else {
@@ -111,7 +112,6 @@ $(document).ready(function() {
       $('#resetButtonContainer').html('<button id="resetButton" class="button">Reset Game</button>');
       $('#letterBoard').prop('disabled', false);
       // game.startGame(); //this could be more dry but I ended up repeating some of the stateGame function in resetGame after I broke everything when I added difficulty modes
-
     }
   };
 
@@ -249,6 +249,11 @@ $(document).ready(function() {
         difficulty.setDifficulty($theClickedDifficultyButton);
       }
     },
+    hintButtonHandler : function (event){
+      event.stopPropagation();
+      $('#containerForHint').append("The category is: ");
+      $('#hintButton').remove();
+    }
   };
 
 
@@ -257,6 +262,7 @@ $(document).ready(function() {
   $('#resetButtonContainer').on('click', '#resetButton', buttonHandlers.resetClickHandler);
   $('#reset-score-board').on('click', buttonHandlers.resetScoreBoardHandler);
   $('.difficulty-button').on('click', buttonHandlers.difficultyButtonHandler);
+  $('#containerForHiddenLetterList').on('click', '#hintButton', buttonHandlers.hintButtonHandler);
 
 
 });
