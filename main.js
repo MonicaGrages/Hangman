@@ -21,7 +21,6 @@ $(document).ready(function() {
       return secretWord;
     },
     showHiddenLetterList : function() {
-      console.log('show hidden letter thinks it is: '+game.secretWord);
       var hiddenLetterArray = [];
       for (var i=0; i<game.secretWord.length; i++) {
         hiddenLetterArray.push('_ ');
@@ -34,13 +33,11 @@ $(document).ready(function() {
   var game = {
     isOngoing : false,
     startGame : function () {
-      console.log(difficulty.difficultyLevel === 'two-player');
       if (difficulty.difficultyLevel === 'two-player') {
         game.secretWord = secretWordStuff.getSecretWordFromUser();
       } else {
         game.secretWord = secretWordStuff.generateRandomSecretWord();
       }
-      console.log('startGame thinks it is: '+game.secretWord);
       game.isOngoing = true;
       secretWordStuff.showHiddenLetterList();
       letterBoard.showLetters();
@@ -89,7 +86,6 @@ $(document).ready(function() {
       //called by reset/play again button click or difficulty level change
       if (difficulty.difficultyLevel === 'two-player') {
         game.secretWord = secretWordStuff.getSecretWordFromUser();
-        console.log('resetGame thinks secret word is: '+game.secretWord);
       } else {
         game.secretWord = secretWordStuff.generateRandomSecretWord();
       }
