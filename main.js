@@ -2,7 +2,7 @@ $(document).ready(function() {
 
 
   var secretWordStuff = {
-    wordBank : ['tacos', 'watermelon', 'hat', 'advice', 'javascript', 'array', 'podcast', 'grandmother', 'wolf', 'satellite'],
+    wordBank : ['tacos', 'watermelon', 'banana', 'javascript', 'array', 'wolf', 'dog', 'fox'],
     generateRandomSecretWord : function () {
       var randomIndexNumber = Math.floor(secretWordStuff.wordBank.length*(Math.random()));
       secretWord = secretWordStuff.wordBank[randomIndexNumber];
@@ -78,7 +78,7 @@ $(document).ready(function() {
     endGame : function (winOrLossMessage) {
       game.isOngoing = false;
       $('#letterBoard').prop('disabled', true);
-      $('#letterBoard').html('<span class="winOrLossMessage">'+winOrLossMessage+'</span>');
+      $('#letterBoard').html('<span class="winOrLossMessage" style="padding: 50px;">'+winOrLossMessage+'</span>'); //I want padding around only the win message, not the letter board
       $('#hiddenLetterList').html(game.secretWord);
       $('#resetButton').html('Play Again');
     },
@@ -105,7 +105,7 @@ $(document).ready(function() {
       $('#startButton').remove();
       $('#resetButtonContainer').html('<button id="resetButton" class="button">Reset Game</button>');
       $('#letterBoard').prop('disabled', false);
-      // game.startGame();
+      // game.startGame(); //this could be more dry but I ended up repeating some of the stateGame function in resetGame after I broke everything when I added difficulty modes
 
     }
   };

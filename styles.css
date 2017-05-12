@@ -131,7 +131,7 @@ button:hover {
   position: fixed;
   bottom: 0;
   width: 100%;
-  box-sizing: border-box;
+  box-sizing: border-box;  /*looking into this property was a tip from Peter when I couldn't figure out why my footer content was running off the page*/
 }
 
 .footer-link {
@@ -151,18 +151,22 @@ button:hover {
 @media only screen and (max-device-width : 480px) {
   body {
   }
+
   .game-board-wrapper {
     flex-direction: column;
     margin-right: 0;
   }
+
   #letterBoard {
     width: 80%;
   }
+
   .button-container {
     flex-direction: column;
     justify-content: space-between;
     order: 5;
   }
+
   img {
     margin-right: 75px;
   }
