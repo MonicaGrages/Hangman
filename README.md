@@ -16,4 +16,4 @@ But the finished product is more polished:
 
 #### This project was created using JavaScript and JQuery
 
-#### In version 2, I plan to add a "hint" feature in easy mode only that allows the player to reveal a category or theme of the secret word. I would also like to fix the score board so it makes more sense in two player mode.
+#### In version 2, I plan to use a different method to collect the user's secret word, instead of a prompt box, and figure out how to hide the typed content so the user's opponent cannot see what is typed. I would also like to fix the score board so it makes more sense in two player mode.
