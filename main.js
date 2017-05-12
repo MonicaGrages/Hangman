@@ -2,7 +2,7 @@ $(document).ready(function() {
 
 
   var secretWordStuff = {
-    wordBank : ['tacos', 'watermelon', 'banana', 'javascript', 'array', 'wolf', 'dog', 'fox'],
+    wordBank : ['tacos', 'watermelon', 'banana', 'javascript', 'array', 'wolf', 'fox', 'shark'],
     generateRandomSecretWord : function () {
       var randomIndexNumber = Math.floor(secretWordStuff.wordBank.length*(Math.random()));
       secretWord = secretWordStuff.wordBank[randomIndexNumber];
@@ -74,15 +74,16 @@ $(document).ready(function() {
         game.endGame('You Lose');
         scoreBoard.incrementLoseScore();
       }
-      if (difficulty.difficultyLevel === 'easy' && game.numberOfGuessesRemaining === 3) {
+      if (difficulty.difficultyLevel === 'easy' && game.numberOfGuessesRemaining === 3 && $('#containerForHintButton').children().length === 0) {
         //add a hint button here
-        console.log('get hint button');
-        $('#containerForHiddenLetterList').append('<button id="hintButton" class="button">Need a hint?</button>');
+        $('#containerForHintButton').append('<button id="hintButton" class="button">Need a hint?</button>');
       }
     },
     endGame : function (winOrLossMessage) {
       game.isOngoing = false;
-      $('#letterBoard').prop('disabled', true);
+      $('#hintButton').prop('disabled', true); //disable the hint button if it was there
+      $('#hintButton').addClass('disabled');
+      $('#letterBoard').prop('disabled', true); //so nothing happens if you click the win message
       $('#letterBoard').html('<span class="winOrLossMessage" style="padding: 50px;">'+winOrLossMessage+'</span>'); //I want padding around only the win message, not the letter board
       $('#hiddenLetterList').html(game.secretWord);
       $('#resetButton').html('Play Again');
@@ -90,6 +91,7 @@ $(document).ready(function() {
     resetGame : function () {
       //called by reset/play again button click or difficulty level change
       $('#containerForHint').empty(); //if there was a hint, delete it
+      $('#containerForHintButton').empty(); //if there was a hint button, delete it
       if (difficulty.difficultyLevel === 'two-player') {
         game.secretWord = secretWordStuff.getSecretWordFromUser();
       } else {
@@ -207,6 +209,26 @@ $(document).ready(function() {
 
 
 
+  var hintThings = {
+    getHint: function () {
+      for (var i=0; i < secretWordStuff.wordBank.length; i++) {
+        if (game.secretWord === secretWordStuff.wordBank[i]) {
+          if (i <= 2) {
+            hintThings.hint = 'food';
+          } else if (i >2 && i <= 4) {
+            hintThings.hint = 'developer terms';
+          } else if (i > 4) {
+            hintThings.hint = 'animals';
+          }
+          hintThings.showHint();
+        }
+      }
+    },
+    showHint: function() {
+      $('#containerForHint').append("The category is: "+hintThings.hint); //show the hint below the hidden letter list
+    }
+  };
+
   var buttonHandlers = {
     startClickHandler : function(event) {
       //  if (difficulty.difficultyLevel === 'easy' || difficulty.difficultyLevel ==='hard') {
@@ -251,8 +273,9 @@ $(document).ready(function() {
     },
     hintButtonHandler : function (event){
       event.stopPropagation();
-      $('#containerForHint').append("The category is: ");
-      $('#hintButton').remove();
+      hintThings.getHint();
+      $('#hintButton').prop('disabled', true);
+      $('#hintButton').addClass('disabled');
     }
   };
 
