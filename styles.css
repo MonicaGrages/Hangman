@@ -99,6 +99,7 @@ a.clicked {
   font-size: 100px;
   font-family: 'Love Ya Like A Sister', cursive;
   text-transform: uppercase;
+  margin-bottom: 70px;
 }
 
 .winOrLossMessage {
@@ -127,7 +128,7 @@ button:hover {
   justify-content: space-between;
   align-items: center;
   font-size: 20px;
-  position: relative;
+  position: fixed;
   bottom: 0;
   width: 100%;
   box-sizing: border-box;
