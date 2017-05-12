@@ -93,13 +93,20 @@ a.clicked {
   color: gray;
 }
 
+#containerForHiddenLetterList {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 70px;
+}
+
 #hiddenLetterList {
   text-align: center;
   letter-spacing: 10px;
   font-size: 100px;
   font-family: 'Love Ya Like A Sister', cursive;
   text-transform: uppercase;
-  margin-bottom: 70px;
 }
 
 .winOrLossMessage {

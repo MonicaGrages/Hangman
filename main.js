@@ -74,6 +74,11 @@ $(document).ready(function() {
         game.endGame('You Lose');
         scoreBoard.incrementLoseScore();
       }
+      if (difficulty.difficultyLevel === 'easy' && game.numberOfGuessesRemaining === 3) {
+        //add a hint button here
+        console.log('get hint button');
+        $('#containerForHiddenLetterList').append('<button id="hintButton" class="button">Need a hint?</button>');
+      }
     },
     endGame : function (winOrLossMessage) {
       game.isOngoing = false;
