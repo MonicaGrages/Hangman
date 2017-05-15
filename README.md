@@ -2,6 +2,8 @@
 
 ### This is the first project I completed for my Web Development Immersive class at General Assembly
 
+#### Hangman is played by guessing letters you think are within the secret word. Reveal the whole word before your remaining incorrect guesses reaches zero.
+
 [Click here to see and play the live game](http://play-hangman.bitballoon.com/)
 
 [Click here to see the Trello board for this project](https://trello.com/b/FaMcXkwt/wdi-project-1)
